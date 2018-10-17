@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linuxweb," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="http协议与httpdSocket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现">
+<meta name="keywords" content="linuxweb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议与httpd">
+<meta property="og:url" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/index.html">
+<meta property="og:site_name" content="熊凡懿的博客">
+<meta property="og:description" content="http协议与httpdSocket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/1.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/2.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/4.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/5.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/6.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/7.png">
+<meta property="og:updated_time" content="2018-10-17T09:07:55.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http协议与httpd">
+<meta name="twitter:description" content="http协议与httpdSocket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现">
+<meta name="twitter:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xfanyi.top/2018/10/17/http协议与httpd/"/>
+
+
+
+
+
+  <title>http协议与httpd | 熊凡懿的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <script>
+class Circle {
+    //创建对象
+    //以一个圆为对象
+    //设置随机的 x，y坐标，r半径，_mx，_my移动的距离
+    //this.r是创建圆的半径，参数越大半径越大
+    //this._mx,this._my是移动的距离，参数越大移动
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.r = Math.random() * 10 ;
+        this._mx = Math.random() ;
+        this._my = Math.random() ;
+
+    }
+
+    //canvas 画圆和画直线
+    //画圆就是正常的用canvas画一个圆
+    //画直线是两个圆连线，为了避免直线过多，给圆圈距离设置了一个值，距离很远的圆圈，就不做连线处理
+    drawCircle(ctx) {
+        ctx.beginPath();
+        //arc() 方法使用一个中心点和半径，为一个画布的当前子路径添加一条弧。
+        ctx.arc(this.x, this.y, this.r, 0, 360)
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
+        ctx.fill();
+    }
+
+    drawLine(ctx, _circle) {
+        let dx = this.x - _circle.x;
+        let dy = this.y - _circle.y;
+        let d = Math.sqrt(dx * dx + dy * dy)
+        if (d < 150) {
+            ctx.beginPath();
+            //开始一条路径，移动到位置 this.x,this.y。创建到达位置 _circle.x,_circle.y 的一条线：
+            ctx.moveTo(this.x, this.y);   //起始点
+            ctx.lineTo(_circle.x, _circle.y);   //终点
+            ctx.closePath();
+            ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
+            ctx.stroke();
+        }
+    }
+
+    // 圆圈移动
+    // 圆圈移动的距离必须在屏幕范围内
+    move(w, h) {
+        this._mx = (this.x < w && this.x > 0) ? this._mx : (-this._mx);
+        this._my = (this.y < h && this.y > 0) ? this._my : (-this._my);
+        this.x += this._mx / 2;
+        this.y += this._my / 2;
+    }
+}
+//鼠标点画圆闪烁变动
+class currentCirle extends Circle {
+    constructor(x, y) {
+        super(x, y)
+    }
+
+    drawCircle(ctx) {
+        ctx.beginPath();
+        //注释内容为鼠标焦点的地方圆圈半径变化
+        //this.r = (this.r < 14 && this.r > 1) ? this.r + (Math.random() * 2 - 1) : 2;
+        this.r = 8;
+        ctx.arc(this.x, this.y, this.r, 0, 360);
+        ctx.closePath();
+        //ctx.fillStyle = 'rgba(0,0,0,' + (parseInt(Math.random() * 100) / 100) + ')'
+        ctx.fillStyle = 'rgba(255, 77, 54, 0.3)'
+        ctx.fill();
+
+    }
+}
+//更新页面用requestAnimationFrame替代setTimeout
+window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+let w = canvas.width = canvas.offsetWidth;
+let h = canvas.height = canvas.offsetHeight;
+let circles = [];
+let current_circle = new currentCirle(0, 0)
+
+let draw = function () {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].move(w, h);
+        circles[i].drawCircle(ctx);
+        for (j = i + 1; j < circles.length; j++) {
+            circles[i].drawLine(ctx, circles[j])
+        }
+    }
+    if (current_circle.x) {
+        current_circle.drawCircle(ctx);
+        for (var k = 1; k < circles.length; k++) {
+            current_circle.drawLine(ctx, circles[k])
+        }
+    }
+    requestAnimationFrame(draw)
+}
+
+let init = function (num) {
+    for (var i = 0; i < num; i++) {
+        circles.push(new Circle(Math.random() * w, Math.random() * h));
+    }
+    draw();
+}
+window.addEventListener('load', init(60));
+window.onmousemove = function (e) {
+    e = e || window.event;
+    current_circle.x = e.clientX;
+    current_circle.y = e.clientY;
+}
+window.onmouseout = function () {
+    current_circle.x = null;
+    current_circle.y = null;
+
+};
+</script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">熊凡懿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止尽、一直在路上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            linux基础篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxshell">
+          <a href="/categories/linuxshell/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            shell编程篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxapp">
+          <a href="/categories/linuxapp/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            linux应用篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxweb">
+          <a href="/categories/linuxweb/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-internet-explorer"></i> <br />
+            
+            Web服务篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-haproxy">
+          <a href="/categories/haproxy/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-h-square"></i> <br />
+            
+            负载匀衡
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cache">
+          <a href="/categories/cache/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-umbrella"></i> <br />
+            
+            缓存技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-puppet">
+          <a href="/categories/puppet/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            自动化运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/categories/docker/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            容器技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-monitor">
+          <a href="/categories/monitor/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-eye"></i> <br />
+            
+            监控技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fighter-jet"></i> <br />
+            
+            python学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essays">
+          <a href="/categories/essays/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xfanyi.top/2018/10/17/http协议与httpd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="X Fan Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="熊凡懿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">http协议与httpd</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-17T08:55:08+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linuxweb/" itemprop="url" rel="index">
+                    <span itemprop="name">linuxweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  25
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+
+      
+      
+
+      
+        <h2 id="http协议与httpd"><a href="#http协议与httpd" class="headerlink" title="http协议与httpd"></a>http协议与httpd</h2><h3 id="Socket套接字"><a href="#Socket套接字" class="headerlink" title="Socket套接字"></a>Socket套接字</h3><p>&hearts;  跨网络的主机间通讯</p>
+<ul>
+<li>在建立通信连接的每一端，进程间的传输要有两个标志</li>
+<li>IP地址和端口号，合称为套接字地址 socket address</li>
+<li>客户机套接字地址定义了一个唯一的客户进程</li>
+<li>服务器套接字地址定义了一个唯一的服务器进程<br>&diams; 示图<br><img src="/2018/10/17/http协议与httpd/1.png" alt="jpeg"></li>
+</ul>
+<p>&hearts; Socket套接字介绍</p>
+<ul>
+<li>Socket:套接字，进程间通信IPC的一种实现，允许位于不同主机（或同一主机）上不同进程之间进行通信和数据交换，SocketAPI出现于1983年，4.2 BSD实现</li>
+<li><p>Socket API：封装了内核中所提供的socket通信相关的系统调用</p>
+</li>
+<li><p>Socket Domain：根据其所使用的地址<br>&diams; AF_INET：Address Family，IPv4<br>&diams; AF_INET6：IPv6<br>&diams; AF_UNIX：同一主机上不同进程之间通信时使用</p>
+</li>
+<li><p>Socket Type：根据使用的传输层协议<br>&diams; SOCK_STREAM：流，tcp套接字，可靠地传递、面向连接<br>&diams; SOCK_DGRAM：数据报，udp套接字，不可靠地传递、无连接<br>&diams; SOCK_RAW: 裸套接字,无须tcp或udp,APP直接通过IP包通信</p>
+<a id="more"></a>
+</li>
+<li><p>套接字相关的系统调用<br>&diams; socket(): 创建一个套接字<br>&diams; bind()： 绑定IP和端口<br>&diams; listen()： 监听<br>&diams; accept()： 接收请求<br>&diams; connect()： 请求连接建立<br>&diams; write()： 发送<br>&diams; read()： 接收<br>&diams; close(): 关闭连接</p>
+</li>
+<li><p>基于TCP客户/服务器程序的套接字函数<br>&diams; 示图1<br><img src="/2018/10/17/http协议与httpd/2.png" alt="jpeg"><br>&diams; 示图2<br><img src="/2018/10/17/http协议与httpd/4.png" alt="jpeg"></p>
+</li>
+</ul>
+<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><h4 id="协议介绍"><a href="#协议介绍" class="headerlink" title="协议介绍"></a>协议介绍</h4><p>&hearts;  http协议介绍及术语</p>
+<ul>
+<li><p>超文本传输协议（英文：HyperText Transfer Protocol，缩写：HTTP）是一种用于分布式、协作式和超媒体信息系统的应用层协议,80/tcp</p>
+</li>
+<li><p>http/0.9：1991，原型版本，功能简陋，只有一个命令GET。GET/index.html ,服务器只能回应HTML格式字符串，不能回应别的格式  </p>
+</li>
+<li><p>http/1.0: 1996年5月,支持cache, MIME, method<br>&diams;  每个TCP连接只能发送一个请求，发送数据完毕，连接就关闭，如果还要请求其他资源，就必须再新建一个连接<br>&diams;  引入了POST命令和HEAD命令<br>&diams;  头信息是 ASCII 码，后面数据可为任何格式。服务器回应时会告诉客户端，数据是什么格式，即Content-Type字段的作用。这些数据类型总称为MIME 多用途互联网邮件扩展，每个值包括一级类型和二级类型，预定义的类型，也可自定义类型, 常见Content-Type值：text/xml image/jpeg audio/mp3</p>
+</li>
+<li><p>http/1.1：1997年1月<br>&diams; 引入了持久连接（persistent connection），即TCP连接默认不关闭，可以被多个请求复用，不用声明Connection: keep-alive。对于同一个域名，大多数浏览器允许同时建立6个持久连接<br>&diams; 引入了管道机制（pipelining），即在同一个TCP连接里，客户端可以同时发送多个请求，进一步改进了HTTP协议的效率<br>&diams; 新增方法：PUT、PATCH、OPTIONS、DELETE<br>&diams; 同一个TCP连接里，所有的数据通信是按次序进行的。服务器只能顺序处理回应，前面的回应慢，会有许多请求排队，造成”队头堵塞”（Head-of-lineblocking）<br>&diams; 为避免上述问题，两种方法：一是减少请求数，二是同时多开持久连接。网页优化技巧，如合并脚本和样式表、将图片嵌入CSS代码、域名分片（domainsharding）等<br>&diams; HTTP 协议不带有状态，每次请求都必须附上所有信息。请求的很多字段都是重复的，浪费带宽，影响速度</p>
+</li>
+<li><p>Spdy：2009年,谷歌研发,解决 HTTP/1.1 效率不高问题</p>
+</li>
+<li><p>http/2.0：2015年<br>&diams; 头信息和数据体都是二进制，称为头信息帧和数据帧<br>&diams; 复用TCP连接，在一个连接里，客户端和浏览器都可以同时发送多个请求或回应，且不用按顺序一一对应，避免了“队头堵塞“,此双向的实时通信称为多工（Multiplexing）<br>&diams;  引入头信息压缩机制（header compression）,头信息使用gzip或compress压缩后再发送；客户端和服务器同时维护一张头信息表，所有字段都会存入这个表，生成一个索引号，不发送同样字段，只发送索引号，提高速度<br>&diams; HTTP/2 允许服务器未经请求，主动向客户端发送资源，即服务器推送（serverpush）</p>
+</li>
+</ul>
+<h4 id="Http相关术语"><a href="#Http相关术语" class="headerlink" title="Http相关术语"></a>Http相关术语</h4><p>&hearts;  http相关术语</p>
+<ul>
+<li><p>html: Hyper Text Markup Language 超文本标记语言，编程语言<br>&diams; 用html语言编写的文本及超文本</p>
+</li>
+<li><p>CSS: Cascading Style Sheet 层叠样式表<br>&diams; 层叠样式表（英语：Cascading Style Sheets，简写CSS），又称串样式列表、级联样式表、串接样式表、阶层式样式表，一种用来为结构化文档（如HTML文档或XML应用）添加样式（字体、间距和颜色等）的计算机语言，由W3C定义和维护。</p>
+</li>
+<li><p>js: javascript<br>&diams; JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。 </p>
+</li>
+</ul>
+<h5 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h5><ul>
+<li>MIME： Multipurpose Internet Mail Extensions多用途互联网邮件扩展 /etc/mime.types</li>
+<li><p>格式：major/minor<br>&diams;  text/plain<br>&diams;  text/html<br>&diams;  text/css<br>&diams;  image/jpeg<br>&diams;  image/png<br>&diams;  video/mp4<br>&diams;  application/javascript<br>&diams;  参考：<a href="http://www.w3school.com.cn/media/media_mimeref.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/media/media_mimeref.asp</a></p>
+</li>
+<li><p>MIME类型<br>&diams;  Web服务器要负责确定响应主体的MIME类型。多种配置服务器的方法可将MIME类型与资源管理起来</p>
+<p> &diams;  魔法分类：Apache web服务器可以扫描每个资源的内容，并将其与一个已知模式表(被称为魔法文件)进行匹配，以决定每个文件的MIME类型。这样做可能比较慢，但很方便，尤其是文件没有标准扩展名时</p>
+<p> &diams;  显式分类：可以对Web服务器进行配置，使其不考虑文件的扩展名或内容，强制特定文件或目录内容拥有某个MIME类型</p>
+<p> &diams;  类型协商： 有些Web服务器经过配置，可以以多种文档格式来存储资源。在这种情况下，可以配置Web服务器，使其可以通过与用户的协商来决定使用哪种格式(及相关的MIME类型)”最好”</p>
+</li>
+</ul>
+<h5 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h5><ul>
+<li>URI: Uniform Resource Identifier 统一资源标识，分为URL和URN</li>
+<li>两者区别：URN如同一个人的名称，而URL代表一个人的住址。换言之，URN定义某事物的身份，而URL提供查找该事物的方法。URN仅用于命名，而不指定地址</li>
+</ul>
+<h6 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h6><ul>
+<li>URN: Uniform Resource Naming，统一资源命名</li>
+<li>示例： P2P下载使用的磁力链接是URN的一种实现<br>&diams;  xfanyinet:?xt=urn:btih:660557A6890EF888666</li>
+</ul>
+<h6 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h6><ul>
+<li>URL: Uniform Resorce Locator，统一资源定位符，用于描述某服务器某特定资源位置 </li>
+<li><p><code>&lt;scheme&gt;://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;path&gt;;&lt;params&gt;?&lt;query&gt;#&lt;frag&gt;</code><br>  &diams;   scheme:方案，访问服务器以获取资源时要使用哪种协议<br>  &diams;    user:用户，某些方案访问资源时需要的用户名<br>  &diams;   password:密码，用户对应的密码，中间用：分隔<br>  &diams;   Host:主机，资源宿主服务器的主机名或IP地址<br>  &diams;  port:端口,资源宿主服务器正在监听的端口号，很多方案有默认端口号<br>  &diams;       path:路径,服务器资源的本地名，由一个/将其与前面的URL组件分隔<br>  &diams;     params:参数，指定输入的参数，参数为名/值对，多个参数，用;分隔<br>  &diams;  query:查询，传递参数给程序，如数据库，用？分隔,多个查询用&amp;分隔<br>  &diams;     frag:片段,一小片或一部分资源的名字，此组件在客户端使用，用#分隔</p>
+</li>
+<li><p>示例<br>&diams;  <a href="http://www.xfanyi.top/images/logo.jpg">http://www.xfanyi.top/images/logo.jpg</a><br>&diams;  <a href="ftp://xfanyi:password@172.16.0.1/pub/linux.ppt" target="_blank" rel="noopener">ftp://xfanyi:password@172.16.0.1/pub/linux.ppt</a><br>&diams;  rtsp://videoserver/video_demo/<br>&diams;  <a href="http://www.xfanyi.com/bbs/hello;gender=f/send;type=title" target="_blank" rel="noopener">http://www.xfanyi.com/bbs/hello;gender=f/send;type=title</a><br>&diams;     <a href="http://apache.org/index.html#projects-list" target="_blank" rel="noopener">http://apache.org/index.html#projects-list</a></p>
+</li>
+</ul>
+<h5 id="WEB资源"><a href="#WEB资源" class="headerlink" title="WEB资源"></a>WEB资源</h5><ul>
+<li><p>Web资源：web resource<br>&diams; 一个网页由多个资源构成，打开一个页面，会有多个资源展示出来，但是每个资源都要单独请求。因此，一个“Web 页面”通常并不是单个资源，而是一组资源的集合</p>
+</li>
+<li><p>文件类型</p>
+<p> &diams;  静态文件：无需服务端做出额外处理<br> &diams; 文件后缀：.html, .txt, .jpg, .js, .css, .mp3, .avi</p>
+<p> &diams;   动态文件：服务端执行程序，返回执行的结果<br> &diams; 文件后缀：.php, .jsp ,.as</p>
+</li>
+</ul>
+<h5 id="网站访问量"><a href="#网站访问量" class="headerlink" title="网站访问量"></a>网站访问量</h5><ul>
+<li><p>IP(独立IP)：即Internet Protocol,指独立IP数。一天内来自相同客户机IP地址只计算一次，记录远程客户机IP地址的计算机访问网站的次数，是衡量网站流量的重要指标</p>
+</li>
+<li><p>PV(访问量)： 即Page View, 页面浏览量或点击量，用户每次刷新即被计算一次，PV反映的是浏览某网站的页面数，PV与来访者的数量成正比，PV并不是页面的来访者数量，而是网站被访问的页面数量</p>
+</li>
+<li><p>UV(独立访客)：即Unique Visitor,访问网站的一台电脑为一个访客。一天内相同的客户端只被计算一次。可以理解成访问某网站的电脑的数量。网站判断来访电脑的身份是通过来访电脑的cookies实现的。如果更换了IP后但不清除cookies，再访问相同网站，该网站的统计中UV数是不变的</p>
+</li>
+<li><p>网站统计：<a href="http://www.alexa.cn/rank/" target="_blank" rel="noopener">http://www.alexa.cn/rank/</a></p>
+</li>
+<li><p>QPS：request per second，每秒请求数<br>&diams;  PV，QPS,并发连接数换算公式<br>QPS= PV* 页⾯衍⽣连接次数/ 统计时间（86400）<br>并发连接数 =QPS * http平均响应时间</p>
+<p> &diams;  峰值时间：每天80%的访问集中在20%的时间里，这20%时间为峰值时间</p>
+<p> &diams;  峰值时间每秒请求数(QPS)=( 总PV数 *页⾯衍⽣连接次数）*80% ) / (每天秒数 * 20% )</p>
+</li>
+<li><p>示例<br>&diams;  甲乙丙三人在同一台通过ADSL上网的电脑上（中间没有断网），分别访问<a href="http://www.xfanyi.yi网站，并且每人各浏览了2个页面，那么网站的流量统计是：" target="_blank" rel="noopener">www.xfanyi.yi网站，并且每人各浏览了2个页面，那么网站的流量统计是：</a><br>&diams;  IP: 1 PV:6 UV：1</p>
+<p> &diams;  若三人都是ADSL重新拨号后,各浏览了2个页面，则<br> &diams;  IP: 3 PV:6 UV：1</p>
+</li>
+</ul>
+<h4 id="http工作机制"><a href="#http工作机制" class="headerlink" title="http工作机制"></a>http工作机制</h4><p>&hearts; http工作机制</p>
+<ul>
+<li>工作机制<br>&diams;  http请求：http request<br>&diams;  http响应：http response<br>&diams;  一次http事务：请求<-->响应</--></li>
+</ul>
+<ul>
+<li><p>提高HTTP连接性能方案<br>&diams;  并行连接：通过多条TCP连接发起并发的HTTP请求<br>&diams;  持久连接：keep-alive,长连接，重用TCP连接，以消除连接和关闭的时延,以事务个数和时间来决定是否关闭连接<br>&diams;  管道化连接：通过共享TCP连接发起并发的HTTP请求<br>&diams;  复用的连接：交替传送请求和响应报文（实验阶段）<br>&diams;  http连接请求<br><img src="/2018/10/17/http协议与httpd/5.png" alt="jpeg"></p>
+<p> &diams; 串行和并行连接<br> <img src="/2018/10/17/http协议与httpd/6.png" alt="jpeg"></p>
+<p> &diams;  串行,持久连接和管道<br> <img src="/2018/10/17/http协议与httpd/7.png" alt="jpeg"></p>
+</li>
+</ul>
+<h4 id="一次完整http请求过程"><a href="#一次完整http请求过程" class="headerlink" title="一次完整http请求过程"></a>一次完整http请求过程</h4><ol>
+<li>建立连接：接收或拒绝连接请求</li>
+<li><p>接收请求：接收客户端请求报文中对某资源的一次请求的过程</p>
+<ul>
+<li><p>Web访问响应模型（Web I/O）<br>&diams;  单进程I/O模型<br>&diams;  启动一个进程处理用户请求，而且一次只处理一个，多个请求被串行响应</p>
+<p>&diams; 多进程I/O模型<br>&diams; 并行启动多个进程,每个进程响应一个连接请求</p>
+<p>&diams; 复用I/O结构<br>&diams; 启动一个进程，同时响应N个连接请求<br>&diams; 多线程模型：一个进程生成N个线程，每线程响应一个连接请求<br>&diams; 事件驱动：一个进程处理N个请求</p>
+<p>&diams; 复用的多进程I/O模型<br>&diams; 启动M个进程，每个进程响应N个连接请求，同时接收M*N个请求</p>
+</li>
+</ul>
+</li>
+<li><p>处理请求：服务器对请求报文进行解析，并获取请求的资源及请求方法等相关信息，根据方法，资源，首部和可选的主体部分对请求进行处理</p>
+<ul>
+<li><p>元数据：请求报文首部<br>&diams;  <code>&lt;method&gt; &lt;URL&gt; &lt;VERSION&gt;</code>  起始行<br>&diams;  <code>HEADERS 格式 name:value</code>   请求首部或响应首部<br>&diams;  <code>&lt;request body&gt;</code> 实体部分</p>
+</li>
+<li><p>示例<br>&diams;  Host: <a href="http://www.xfanyi.top">www.xfanyi.top</a> 请求的主机名称<br>&diams;  Server: Apache/2.4.7</p>
+</li>
+<li><p>HTTP常用请求方式，Method<br>&diams;  GET、POST、HEAD、PUT、DELETE、TRACE、OPTIONS</p>
+</li>
+</ul>
+</li>
+<li><p>访问资源    </p>
+<ul>
+<li><p>服务器获取请求报文中请求的资源web服务器，即存放了web资源的服务器，负责向请求者提供对方请求的静态资源，或动态运行后生成的资源<br>&diams; 资源放置于本地文件系统特定的路径：DocRoot<br>&diams; DocRoot /var/www/html<br>&diams; /var/www/html/images/logo.jpg</p>
+</li>
+<li><p>web服务器资源路径映射方式<br>&diams; docroot<br>&diams; alias<br>&diams; 虚拟主机docroot<br>&diams; 用户家目录docroot</p>
+</li>
+</ul>
+</li>
+<li><p>构建响应报文</p>
+<ul>
+<li><p>一旦Web服务器识别除了资源，就执行请求方法中描述的动作，并返<br>回响应报文。响应报文中 包含有响应状态码、响应首部，如果生成了<br>响应主体的话，还包括响应主体<br>&diams;  响应实体：如果事务处理产生了响应主体，就将内容放在响应报文中回送过去。响应报文中通常包括<br>&diams; 描述了响应主体MIME类型的Content-Type首部<br>&diams; 描述了响应主体长度的Content-Length</p>
+<p> &diams; 实际报文的主体内容<br> &diams; URL重定向：web服务构建的响应并非客户端请求的资源，而是资源另外一个访问路径<br> &diams; 永久重定向：<a href="http://www.360buy.com" target="_blank" rel="noopener">http://www.360buy.com</a><br> &diams; 临时重定向：<a href="http://www.taobao.com" target="_blank" rel="noopener">http://www.taobao.com</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>发送响应报文</p>
+<ul>
+<li>Web服务器通过连接发送数据时也会面临与接收数据一样的问题。服务器可能有很多条到各个客户端的连接，有些是空闲的，有些在向服务器发送数据，还有一些在向客户端回送响应数据。服务器要记录连接的状态，还要特别注意对持久连接的处理。对非持久连接而言，服务器应该在发送了整条报文之后，关闭自己这一端的连接。对持久连接来说，连接可能仍保持打开状态，在这种情况下，服务器要正确地计算Content-Length首部，不然客户端就无法知道响应什么时候结束了</li>
+</ul>
+</li>
+<li><p>记录日志</p>
+<ul>
+<li>最后，当事务结束时，Web服务器会在日志文件中添加一个条目，来描述已执行的事务</li>
+</ul>
+</li>
+</ol>
+<h3 id="http服务器应用"><a href="#http服务器应用" class="headerlink" title="http服务器应用"></a>http服务器应用</h3><h4 id="服务器程序介绍"><a href="#服务器程序介绍" class="headerlink" title="服务器程序介绍"></a>服务器程序介绍</h4><p>&hearts;  http服务器程序</p>
+<ul>
+<li>httpd apache</li>
+<li>nginx</li>
+<li>lighttpd</li>
+</ul>
+<p>&hearts;  应用程序服务器</p>
+<ul>
+<li>IIS .asp</li>
+<li>tomcat .jsp</li>
+<li>jetty 开源的servlet容器，基于Java的web容器</li>
+<li>Resin CAUCHO公司，支持servlets和jsp的引擎</li>
+<li><p>webshpere(IBM), weblogic(BEA), jboss,oc4j(Oracle)</p>
+</li>
+<li><p>市场占有率统计<br>&diams;  <a href="http://www.netcraft.com" target="_blank" rel="noopener">http://www.netcraft.com</a></p>
+</li>
+</ul>
+<h4 id="httpd"><a href="#httpd" class="headerlink" title="httpd"></a>httpd</h4><h5 id="httpd介绍"><a href="#httpd介绍" class="headerlink" title="httpd介绍"></a>httpd介绍</h5><ul>
+<li><p>20世纪90年代初，国家超级计算机应用中心NCSA开发1995年开源社区发布apache（a patchy server）<br>&diams; ASF: apache software foundation<br>&diams; FSF：Free Software Foundation</p>
+</li>
+<li><p>httpd功能特性<br>&diams; 高度模块化：core + modules<br>&diams; DSO: Dynamic Shared Object 动态加/卸载<br>&diams;  MPM：multi-processing module多路处理模块<br>&diams;  虚拟主机：IP、Port、FQDN<br>&diams;  CGI：Common Gateway Interface，通用网关接口<br>&diams;  反向代理<br>&diams;  负载均衡<br>&diams;  路径别名<br>&diams;  丰富的用户认证机制： basic、digest<br>&diams;     支持第三方模块</p>
+</li>
+</ul>
+<h5 id="httpd安装"><a href="#httpd安装" class="headerlink" title="httpd安装"></a>httpd安装</h5><ul>
+<li><p>版本<br>&diams; CentOS 6: 2.2<br>&diams; CentOS 7: 2.4</p>
+</li>
+<li><p>安装方式<br>&diams; rpm：centos发行版，稳定，建议使用<br>&diams; 编译：定制或特殊需求</p>
+</li>
+<li><p>CentOS 6程序环境：httpd-2.2</p>
+</li>
+<li><p>配置文件<br>&diams; /etc/httpd/conf/httpd.conf<br>&diams; /etc/httpd/conf.d/*.conf</p>
+</li>
+<li><p>检查配置语法<br>&diams; httpd –t<br>&diams; service httpd configtest</p>
+</li>
+<li><p>服务脚本<br>&diams; /etc/rc.d/init.d/httpd<br>&diams; 脚本配置文件：/etc/sysconfig/httpd</p>
+</li>
+<li><p>服务控制和启动<br>&diams; chkconfig httpd on|off<br>&diams; service {start|stop|restart|status|configtest|reload} httpd</p>
+</li>
+<li><p>站点网页文档根目录<br>&diams; /var/www/html</p>
+</li>
+<li><p>模块文件路径<br>&diams; /etc/httpd/modules<br>&diams; /usr/lib64/httpd/modules</p>
+</li>
+<li><p>主程序文件<br>&diams; /usr/sbin/httpd<br>&diams; /usr/sbin/httpd.worker<br>&diams; /usr/sbin/httpd.event</p>
+</li>
+<li><p>主进程文件<br>&diams; /etc/httpd/run/httpd.pid</p>
+</li>
+<li><p>日志文件目录<br>&diams; /var/log/httpd<br>&diams; access_log: 访问日志<br>&diams; error_log：错误日志</p>
+</li>
+<li><p>帮助文档包<br>&diams; httpd-manual</p>
+</li>
+<li><p>httpd配置文件的组成<br>&diams; grep “Section” /etc/httpd/conf/httpd.conf<br>&diams; Section 1: Global Environment<br>&diams; Section 2: ‘Main’ server configuration<br>&diams; Section 3: Virtual Hosts</p>
+</li>
+<li><p>配置格式：directive value<br>&diams; directive: 不区分字符大小写<br>&diams; value: 为路径时，是否区分大小写，取决于文件系统</p>
+</li>
+<li><p>查看模块列表<br>&diams; 查看静态编译的模块<br>&diams; httpd -l</p>
+<p> &diams; 查看静态编译及动态装载的模块<br> &diams; httpd –M</p>
+<p> &diams; 动态模块路径<br> &diams; /usr/lib64/httpd/modules/</p>
+</li>
+</ul>
+<h5 id="httpd-2-2常见配置"><a href="#httpd-2-2常见配置" class="headerlink" title="httpd 2.2常见配置"></a>httpd 2.2常见配置</h5><ol>
+<li><p>显示服务器版本信息<br>&diams; 示例<br>ServerTokens Major|Minor|Min[imal]|Prod[uctOnly]|OS|Full<br>ServerTokens Prod[uctOnly] ：Server: Apache<br>ServerTokens Major: Server: Apache/2<br>ServerTokens Minor: Server: Apache/2.0<br>ServerTokens Min[imal]: Server: Apache/2.0.41<br>ServerTokens OS: Server: Apache/2.0.41 (Unix)<br>ServerTokens Full (or not specified): Server: Apache/2.0.41 (Unix)<br>PHP/4.2.2 MyMod/1.2<br>This setting applies to the entire server and cannot be enabled or<br>disabled on a virtualhost-by-virtualhost basis.<br>After version 2.0.44, this directive also controls the information presented<br>by the ServerSignature directive.<br>建议使用：ServerTokens Prod</p>
+</li>
+<li><p>修改监听的IP和Port</p>
+<ul>
+<li><p>Listen [IP:]PORT<br>&diams; 省略IP表示为本机所有IP<br>&diams; Listen指令至少一个，可重复出现多次</p>
+</li>
+<li><p>示例<br>&diams; Lsten 80<br>&diams; Listen 192.168.1.100:8080</p>
+</li>
+</ul>
+</li>
+<li><p>持久连接</p>
+<ul>
+<li>Persistent Connection：连接建立，每个资源获取完成后不会断开连接，而是继续等待其它的请求完成，默认关闭持久连接</li>
+<li><p>断开条件<br>&diams; 数量限制：100<br>&diams; 时间限制：以秒为单位， httpd-2.4 支持毫秒级<br>&diams; 副作用：对并发访问量较大的服务器，持久连接会使有些请求得不到响应折衷：使用较短的持久连接时间</p>
+</li>
+<li><p>设置<br>&diams; KeepAlive On|Off<br>&diams;  KeepAliveTimeout 15<br>&diams;  MaxKeepAliveRequests 100</p>
+</li>
+<li><p>测试<br>&diams; telnet WEB_SERVER_IP PORT<br>&diams; GET /URL HTTP/1.1<br>&diams; Host: WEB_SERVER_IP</p>
+</li>
+</ul>
+</li>
+<li><p>MPM</p>
+<ul>
+<li>MPM（ Multi-Processing Module）多路处理模块prefork, worker, event（试验阶段）</li>
+<li>httpd-2.2不支持同时编译多个模块，所以只能编译时选定一个；rpm安装的包提供三个二进制程序文件，分别用于实现对不同MPM机制的支持</li>
+<li><p>确认方法<br>&diams; ps aux | grep httpd<br>&diams; 默认为/usr/sbin/httpd, 即prefork模式</p>
+</li>
+<li><p>httpd 2.2更换使用的httpd程序<br>&diams; vim /etc/sysconfig/httpd<br>&diams; HTTPD=/usr/sbin/httpd.worker<br>&diams; 重启服务生效<br>&diams; pstree -p|grep httpd 查看进程和线程</p>
+</li>
+<li><p>httpd 2.4更换使用的httpd程序<br>&diams; 以动态模块方式提供<br>&diams; 配置文件：vim /etc/httpd/conf.modules.d/00-mpm.conf<br>&diams; LoadModule mpm_prefork_module modules/mod_mpm_worker.so<br>&diams; httpd –M |grep mpm<br>&diams; 重启服务生效<br>&diams; pstree -p|grep httpd 查看进程和线程</p>
+</li>
+<li><p>prefork的默认配置<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule prefork.c&gt;</span><br><span class="line"><span class="comment">#默认开启的进程数</span></span><br><span class="line">StartServers       8</span><br><span class="line"><span class="comment">#最少空闲进程数</span></span><br><span class="line">MinSpareServers    5</span><br><span class="line"><span class="comment">#最大空闲进程数</span></span><br><span class="line">MaxSpareServers   20</span><br><span class="line"><span class="comment">#最多进程数,最大20000</span></span><br><span class="line">ServerLimit      256</span><br><span class="line"><span class="comment">#最大并发</span></span><br><span class="line">MaxClients       256</span><br><span class="line"><span class="comment">#每个进程接收多少次请求、生命周期结束</span></span><br><span class="line">MaxRequestsPerChild  4000</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>worker的默认配置<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule worker.c&gt;</span><br><span class="line"><span class="comment">#开启的进程数</span></span><br><span class="line">StartServers 4</span><br><span class="line"><span class="comment">#最大并发</span></span><br><span class="line">MaxClients 300</span><br><span class="line"><span class="comment">#最少空闲进程数</span></span><br><span class="line">MinSpareThreads 25</span><br><span class="line"><span class="comment">#最大空闲进程数</span></span><br><span class="line">MaxSpareThreads 75</span><br><span class="line"><span class="comment">#第个子进程、生成多少个线程</span></span><br><span class="line">ThreadsPerChild 25</span><br><span class="line"><span class="comment">#每个进程接收多少次请求、生命周期结束 0 无限制</span></span><br><span class="line">MaxRequestsPerChild 0 </span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>DSO</p>
+<ul>
+<li>DSO： Dynamic Shared Object<br>&diams;  加载动态模块配置<br>&diams;  /etc/httpd/conf/httpd.conf<br>&diams;  配置指定实现模块加载格式：<br>&diams;  <code>LoadModule &lt;mod_name&gt; &lt;mod_path&gt;</code><br>&diams;  模块文件路径可使用相对路径：<br>&diams;  相对于ServerRoot（默认/etc/httpd）<br>&diams;  示例<br><code>LoadModule auth_basic_module modules/mod_auth_basic.so</code></li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li>定义’Main’ server的文档页面路径<ul>
+<li>DocumentRoot “/path”<br>&diams; 文档路径映射<br>&diams; DocumentRoot指向的路径为URL路径的起始位置<br>&diams; 示例<br>&diams; <code>DocumentRoot &quot;/app/data“</code><br>&diams; <code>http://HOST:PORT/test/index.html --&gt; /app/data/test/index.html</code><br>&diams; 注意：SELinux和iptables的状态</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li>定义站点主页面<ul>
+<li>DirectoryIndex index.html index.html.var</li>
+</ul>
+</li>
+</ol>
+<ol start="8">
+<li>站点访问控制常见机制    <ul>
+<li>可基于两种机制指明对哪些资源进行何种访问控制访问控制机制有两种：客户端来源地址，用户账号</li>
+</ul>
+</li>
+</ol>
+<ol start="9">
+<li><p><directory>中“基于源地址”实现访问控制</directory></p>
+<ul>
+<li><p>Options：后跟1个或多个以空白字符分隔的选项列表在选项前的+，- 表示增加或删除指定选项<br>&diams;  常见选项<br>&diams;  Indexes：指明的URL路径下不存在与定义的主页面资源相符的资源文件时，返回索引列表给用户</p>
+<p>&diams; FollowSymLinks：允许访问符号链接文件所指向的源文件<br>&diams; None：全部禁用<br>&diams; All： 全部允许<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory /web/docs&gt;</span><br><span class="line">Options Indexes FollowSymLinks</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AllowOverride<br>&diams;  与访问控制相关的哪些指令可以放在指定目录下的.htaccess（由AccessFileName指定）文件中，覆盖之前的配置指令<br>&diams; 只对&lt; directory &gt;语句有效<br>&diams; AllowOverride All: .htaccess中所有指令都有效<br>&diams; AllowOverride None： .htaccess 文件无效<br>&diams; AllowOverride AuthConfig Indexes 除了AuthConfig 和Indexes的其它指令都无法覆盖</p>
+</li>
+<li><p>order和allow、deny<br>&diams;  放在directory, .htaccess中<br>&diams;  order：定义生效次序；写在后面的表示默认法则<br>&diams;  Order allow,deny<br>&diams;  Order deny,allow<br>&diams;  Allow from和Deny from：定义客户端地址<br>&diams;  客户端地址<br>&diams;  IP<br>&diams;  网络: 172.16<br>&diams;  示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;files <span class="string">"*.txt"</span>&gt;</span><br><span class="line">order deny,allow</span><br><span class="line">deny from 172.16. 100.100</span><br><span class="line">allow from 172.16</span><br><span class="line">&lt;/files&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>日志设定</p>
+<ul>
+<li><p>日志类型<br>&diams;  访问日志<br>&diams;  错误日志</p>
+</li>
+<li><p>错误日志<br>&diams;  ErrorLog logs/error_log<br>&diams;  LogLevel warn<br>&diams;  LogLevel 可选值: debug, info, notice, warn,error, crit, alert, emerg</p>
+</li>
+<li><p>访问日志<br>&diams;  定义日志格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LogFormat format strings</span><br><span class="line">LogFormat <span class="string">"%h %l %u %&#123;%Y-%m-%d %H:%M:%S&#125;t \"%r\" %&gt;s %b</span></span><br><span class="line"><span class="string">\"%&#123;Referer&#125;i\" \"%&#123;User-Agent&#125;i\""</span> testlog</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用日志格式<br>&diams;  <code>CustomLog logs/access_log testlog</code><br>&diams;  参考帮助<br><a href="http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#formats" target="_blank" rel="noopener">http://httpd.apache.org/docs/2.2/mod/mod_log_config.html#formats</a></p>
+</li>
+<li><p>日志参数<br>&diams; %h 客户端IP地址<br>&diams; %l 远程用户,启用mod_ident才有效，通常为减号“-”<br>&diams; %u 验证（basic，digest）远程用户,非登录访问时，为一个减号“-”<br>&diams; %t 服务器收到请求时的时间<br>&diams; %r First line of request，即表示请求报文的首行；记录了此次请求的“方法”，“URL”以及协议版本<br>&diams;  %&gt;s 响应状态码<br>&diams; %b 响应报文的大小，单位是字节；不包括响应报文http首部<br>&diams; %{Referer}i 请求报文中首部“referer”的值；即从哪个页面中的超链接跳转至当前页面的<br>&diams; %{User-Agent}i 请求报文中首部“User-Agent”的值；即发出请求的应用程序</p>
+</li>
+</ul>
+</li>
+<li><p>设定默认字符集</p>
+<ul>
+<li>AddDefaultCharset UTF-8 此为默认值<br>&diams; 中文字符集：GBK, GB2312, GB18030</li>
+</ul>
+</li>
+<li><p>定义路径别名</p>
+<ul>
+<li>格式：Alias /URL/ “/PATH/“<br>&diams;  示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Alias /download/ <span class="string">"/rpms/pub/"</span></span><br><span class="line">http://www.magedu.com/download/bash.rpm ==&gt;/rpms/pub/bash.rpm</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>基于用户的访问控制</p>
+<ul>
+<li>认证质询：WWW-Authenticate：响应码为401，拒绝客户端请求，并说明要求客户端提供账号和密码</li>
+<li>认证：Authorization：客户端用户填入账号和密码后再次发送请求报文；认证通过时，则服务器发送响应的资源</li>
+<li><p>认证方式两种<br>&diams; basic：明文</p>
+<p>&diams; digest：消息摘要认证,兼容性差<br>&diams; 安全域：需要用户认证后方能访问的路径；应该通过名称对其进行标识，以便于告知用户认证的原因<br>&diams; 用户的账号和密码<br>&diams; 虚拟账号：仅用于访问某服务时用到的认证标识<br>&diams; 存储：文本文件，SQL数据库，ldap目录存储，nis等</p>
+</li>
+<li><p>basic认证配置示例<br>&diams;  定义安全域</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory “/path<span class="string">"&gt;</span></span><br><span class="line"><span class="string">Options None</span></span><br><span class="line"><span class="string">AllowOverride None</span></span><br><span class="line"><span class="string">AuthType Basic</span></span><br><span class="line"><span class="string">AuthName "</span>String“</span><br><span class="line">AuthUserFile <span class="string">"/PATH/HTTPD_USER_PASSWD_FILE"</span></span><br><span class="line">Require user username1 username2 ...</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>&diams;  允许账号文件中的所有用户登录访问<br>&diams;  Require valid-user</p>
+</li>
+<li><p>提供账号和密码存储（文本文件）使用专用命令完成此类文件的创建及用户管理<br>&diams; htpasswd [options] /PATH/HTTPD_PASSWD_FILE username<br>&diams; -c 自动创建文件，仅应该在文件不存在时使用<br>&diams; -p 明文密码<br>&diams; -d CRYPT格式加密，默认<br>&diams; -m md5格式加密<br>&diams; -s sha格式加密<br>&diams; -D 删除指定用户</p>
+</li>
+<li><p>基于组账号进行认证<br>&diams;  定义安全域</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory “/path<span class="string">"&gt;</span></span><br><span class="line"><span class="string">AuthType Basic</span></span><br><span class="line"><span class="string">AuthName "</span>String“</span><br><span class="line">AuthUserFile <span class="string">"/PATH/HTTPD_USER_PASSWD_FILE"</span></span><br><span class="line">AuthGroupFile <span class="string">"/PATH/HTTPD_GROUP_FILE"</span></span><br><span class="line">Require group grpname1 grpname2 ...</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>&diams;  创建用户账号和组账号文件<br>&diams;  组文件：每一行定义一个组<br>&diams;  GRP_NAME: username1 username2 …<br>&diams;  示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory <span class="string">"/www/htdocs/admin"</span>&gt;</span><br><span class="line">Options None</span><br><span class="line">AllowOverride None</span><br><span class="line">AuthType Basic</span><br><span class="line">AuthName <span class="string">"Administator private"</span></span><br><span class="line">AuthUserFile <span class="string">"/etc/httpd/conf.d/.htpasswd"</span></span><br><span class="line">AuthGroupFile <span class="string">"/etc/httpd/conf.d/.htgroup"</span></span><br><span class="line">Require group webadmins</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>&diams;  vim /etc/httpd/conf.d/.htgroup<br>&diams;  webadmins:xiong fang</p>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+
+<div>
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------</div>
+    
+</div>
+</div>
+ 
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="X Fan Yi 微信打赏"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="X Fan Yi 支付宝打赏"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linuxweb/" rel="tag"><i class="fa fa-tag"></i> linuxweb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/25/DNS服务/" rel="next" title="DNS服务">
+                <i class="fa fa-chevron-left"></i> DNS服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5OS8xNjQyNg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="X Fan Yi" />
+            
+              <p class="site-author-name" itemprop="name">X Fan Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://scholar.google.com.hk" target="_blank" title="谷歌学术">
+                      
+                        <i class="fa fa-fw fa-google-plus"></i>谷歌学术</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zh.wikipedia.org" target="_blank" title="维基百科">
+                      
+                        <i class="fa fa-fw fa-wikipedia-w"></i>维基百科</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#http协议与httpd"><span class="nav-number">1.</span> <span class="nav-text">http协议与httpd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket套接字"><span class="nav-number">1.1.</span> <span class="nav-text">Socket套接字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http协议"><span class="nav-number">1.2.</span> <span class="nav-text">http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协议介绍"><span class="nav-number">1.2.1.</span> <span class="nav-text">协议介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Http相关术语"><span class="nav-number">1.2.2.</span> <span class="nav-text">Http相关术语</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MIME"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">MIME</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#URI"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">URI</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#URN"><span class="nav-number">1.2.2.2.1.</span> <span class="nav-text">URN</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#URL"><span class="nav-number">1.2.2.2.2.</span> <span class="nav-text">URL</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WEB资源"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">WEB资源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网站访问量"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">网站访问量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http工作机制"><span class="nav-number">1.2.3.</span> <span class="nav-text">http工作机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一次完整http请求过程"><span class="nav-number">1.2.4.</span> <span class="nav-text">一次完整http请求过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http服务器应用"><span class="nav-number">1.3.</span> <span class="nav-text">http服务器应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器程序介绍"><span class="nav-number">1.3.1.</span> <span class="nav-text">服务器程序介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#httpd"><span class="nav-number">1.3.2.</span> <span class="nav-text">httpd</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#httpd介绍"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">httpd介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#httpd安装"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">httpd安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#httpd-2-2常见配置"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">httpd 2.2常见配置</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">X Fan Yi</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+ <!-- <span class="post-meta-divider">|</span>-->
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共99.4k字</span>
+</div>
+<p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 您是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      位来访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  <div class="bg_content">
+    <canvas id="canvas"></canvas>
+</div>
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
