@@ -80,23 +80,23 @@
 
 
 
-<meta name="description" content="软件包管理软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hear">
+<meta name="description" content="软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hearts;">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件包管理">
 <meta property="og:url" content="https://www.xfanyi.top/2018/08/10/软件包管理/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
-<meta property="og:description" content="软件包管理软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hear">
+<meta property="og:description" content="软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hearts;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/1.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/2.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/3.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/4.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/5.png">
-<meta property="og:updated_time" content="2018-09-29T12:28:19.734Z">
+<meta property="og:updated_time" content="2018-10-21T12:46:30.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件包管理">
-<meta name="twitter:description" content="软件包管理软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hear">
+<meta name="twitter:description" content="软件包相关概念&amp;hearts;    二进制程序组成部分  二进制文件、库文件、配置文件、帮助文件  &amp;hearts;    开发语言  系统级开发&amp;diams;    C&amp;diams; C++ 应用级开发&amp;diams; java&amp;diams; Python&amp;diams; go&amp;diams; php&amp;diams; perl&amp;diams; delphi&amp;diams; ruby  &amp;hearts;">
 <meta name="twitter:image" content="https://www.xfanyi.top/2018/08/10/软件包管理/1.png">
 
 
@@ -585,7 +585,7 @@ window.onmouseout = function () {
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.3k
+                  3.2k
                 </span>
               
 
@@ -623,7 +623,7 @@ window.onmouseout = function () {
       
 
       
-        <h2 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h2><h3 id="软件包相关概念"><a href="#软件包相关概念" class="headerlink" title="软件包相关概念"></a>软件包相关概念</h3><p>&hearts;    二进制程序组成部分</p>
+        <h4 id="软件包相关概念"><a href="#软件包相关概念" class="headerlink" title="软件包相关概念"></a>软件包相关概念</h4><p>&hearts;    二进制程序组成部分</p>
 <ul>
 <li>二进制文件、库文件、配置文件、帮助文件</li>
 </ul>
@@ -643,7 +643,7 @@ window.onmouseout = function () {
 <li>静态链接<br>&diams; 把程序对应的依赖库复制一份到包<br>&diams; libxxx.a<br>&diams; 嵌入程序包<br>&diams; 升级难，需重新编译<br>&diams; 占用较多空间，迁移容易</li>
 <li>动态链接<br>&diams; 只把依赖加做一个动态链接<br>&diams; libxxx.so<br>&diams; 连接指向<br>&diams; 占用较少空间，升级方便<br>&diams; 链接示图<br><img src="/2018/08/10/软件包管理/4.png" alt="jpeg"><br>&diams; C程序静态链接示图<br><img src="/2018/08/10/软件包管理/5.png" alt="jpeg"></li>
 </ul>
-<h3 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h3><p>&hearts;    程序包管理器的作用</p>
+<p>&hearts;    程序包管理器的作用</p>
 <ul>
 <li>功能：将编译好的应用程序的各组成文件打包一个或几个程序包文件，从而方便快捷地实现程序包的安装、卸载、查询、升级和校验等管理操作</li>
 </ul>
@@ -703,8 +703,7 @@ window.onmouseout = function () {
 <li>rpm数据库相关参数： </li>
 <li>rpm {–initdb|–rebuilddb}<br>&diams;  initdb: 初始化<br>&raquo;     如果事先不存在数据库，则新建之<br>&raquo;  否则，不执行任何操作<br>&diams;  rebuilddb：<br>&raquo;  重建已安装的包头的数据库索引目录</li>
 </ul>
-<h4 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h4><h5 id="yum介绍"><a href="#yum介绍" class="headerlink" title="yum介绍"></a>yum介绍</h5><p>&hearts;  yum介绍</p>
-<ul>
+<h4 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h4><h5 id="yum介绍"><a href="#yum介绍" class="headerlink" title="yum介绍"></a>yum介绍</h5><ul>
 <li>YUM: Yellowdog Update Modifier，rpm的前端程序，可解决软件包相关依赖性，可在多个库之间定位软件包，up2date的替代工具<br>&diams;  yum repository: yum repo，存储了众多rpm包，以及包的相关的元数据<br>&diams;  放置于特定目录repodata下 如下文件服务器：<br>&raquo;  http://<br>&raquo;  https://<br>&raquo;  ftp://<br>&raquo;  file://</li>
 </ul>
 <p>&hearts;  yum配置文件</p>
@@ -715,8 +714,7 @@ window.onmouseout = function () {
 <li><p>yum的repo配置文件中可用的变量：<br>&diams; $releasever: 当前OS的发行版的主版本号<br>&diams; $arch: 平台，i386,i486,i586,x86_64等<br>&diams; $basearch：基础平台；i386, x86_64<br>&diams; $YUM0-$YUM9:自定义变量<br>&diams; 实例:<br>&raquo;    <a href="http://server/centos/$releasever/$basearch/" target="_blank" rel="noopener">http://server/centos/$releasever/$basearch/</a><br>&raquo; <a href="http://server/centos/7/x86_64" target="_blank" rel="noopener">http://server/centos/7/x86_64</a><br>&raquo; <a href="http://server/centos/6/i384" target="_blank" rel="noopener">http://server/centos/6/i384</a></p>
 </li>
 </ul>
-<h5 id="yum源"><a href="#yum源" class="headerlink" title="yum源"></a>yum源</h5><p>&hearts;  常用yum源</p>
-<ul>
+<h5 id="yum源"><a href="#yum源" class="headerlink" title="yum源"></a>yum源</h5><ul>
 <li><p>阿里云repo文件：<br>&diams;    <a href="http://mirrors.aliyun.com/repo/" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/</a></p>
 </li>
 <li><p>CentOS系统的yum源<br>&diams; 阿里云：<a href="https://mirrors.aliyun.com/centos/$releasever/os/x86_64/" target="_blank" rel="noopener">https://mirrors.aliyun.com/centos/$releasever/os/x86_64/</a><br>&diams; 清华：<a href="https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/os/x86_64/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/os/x86_64/</a></p>
@@ -726,8 +724,7 @@ window.onmouseout = function () {
 <li><p>管理命令<br>&diams;  yum-config-manager<br>&raquo;  yum-config-manager –disable “仓库名”  禁用仓库<br>&raquo;  yum-config-manager –enable  “仓库名” 启用仓库</p>
 </li>
 </ul>
-<h5 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h5><p>&hearts;  yum命令常用参数</p>
-<ul>
+<h5 id="yum命令"><a href="#yum命令" class="headerlink" title="yum命令"></a>yum命令</h5><ul>
 <li><p>查看程序包information：<br>&diams;  yum info</p>
 </li>
 <li><p>查看指定的特性(可以是某文件)是由哪个程序包所提供：<br>&diams;  yum provides | whatprovides feature1 [feature2] […]</p>
@@ -1039,7 +1036,7 @@ window.onmouseout = function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#软件包管理"><span class="nav-number">1.</span> <span class="nav-text">软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件包相关概念"><span class="nav-number">1.1.</span> <span class="nav-text">软件包相关概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包管理器"><span class="nav-number">1.2.</span> <span class="nav-text">包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rpm包管理器"><span class="nav-number">1.2.1.</span> <span class="nav-text">rpm包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm包来源"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">rpm包来源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm命令"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">rpm命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yum"><span class="nav-number">1.2.2.</span> <span class="nav-text">yum</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#yum介绍"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">yum介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum源"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">yum源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum命令"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">yum命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum仓库搭建"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">yum仓库搭建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码包安装"><span class="nav-number">1.2.3.</span> <span class="nav-text">源码包安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#综合练习"><span class="nav-number">1.2.4.</span> <span class="nav-text">综合练习</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#软件包相关概念"><span class="nav-number">1.</span> <span class="nav-text">软件包相关概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rpm包管理器"><span class="nav-number">2.</span> <span class="nav-text">rpm包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm包来源"><span class="nav-number">2.1.</span> <span class="nav-text">rpm包来源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rpm命令"><span class="nav-number">2.2.</span> <span class="nav-text">rpm命令</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yum"><span class="nav-number">3.</span> <span class="nav-text">yum</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#yum介绍"><span class="nav-number">3.1.</span> <span class="nav-text">yum介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum源"><span class="nav-number">3.2.</span> <span class="nav-text">yum源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum命令"><span class="nav-number">3.3.</span> <span class="nav-text">yum命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yum仓库搭建"><span class="nav-number">3.4.</span> <span class="nav-text">yum仓库搭建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码包安装"><span class="nav-number">4.</span> <span class="nav-text">源码包安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#综合练习"><span class="nav-number">5.</span> <span class="nav-text">综合练习</span></a></li></ol></div>
             
 
           </div>
@@ -1084,7 +1081,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共105k字</span>
+  <span class="post-count">博客全站共107.8k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         

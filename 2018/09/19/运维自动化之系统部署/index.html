@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="自动化之系统部署介绍系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams">
+<meta name="description" content="系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams;    U盘引导，">
 <meta name="keywords" content="puppet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运维自动化之系统部署">
 <meta property="og:url" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
-<meta property="og:description" content="自动化之系统部署介绍系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams">
+<meta property="og:description" content="系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams;    U盘引导，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/1.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/2.png">
@@ -101,10 +101,10 @@
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/21.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/22.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/23.png">
-<meta property="og:updated_time" content="2018-10-15T07:45:46.636Z">
+<meta property="og:updated_time" content="2018-10-21T12:26:54.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运维自动化之系统部署">
-<meta name="twitter:description" content="自动化之系统部署介绍系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams">
+<meta name="twitter:description" content="系统安装过程&amp;hearts;    系统启动流程：  bootloader–&amp;gt;kernel(initramfs)–&amp;gt;rootfs–&amp;gt;/sbin/init  &amp;hearts;    要进入安装步骤，需要先有一个引导程序引导启动一个特殊的Linux安装环境系统  引导有多种方式：&amp;diams;    基于网络方式的小型引导镜像，需要提供小型的引导镜像；&amp;diams;    U盘引导，">
 <meta name="twitter:image" content="https://www.xfanyi.top/2018/09/19/运维自动化之系统部署/1.png">
 
 
@@ -631,7 +631,7 @@ window.onmouseout = function () {
       
 
       
-        <h2 id="自动化之系统部署介绍"><a href="#自动化之系统部署介绍" class="headerlink" title="自动化之系统部署介绍"></a>自动化之系统部署介绍</h2><h3 id="系统安装过程"><a href="#系统安装过程" class="headerlink" title="系统安装过程"></a>系统安装过程</h3><p>&hearts;    系统启动流程：</p>
+        <h3 id="系统安装过程"><a href="#系统安装过程" class="headerlink" title="系统安装过程"></a>系统安装过程</h3><p>&hearts;    系统启动流程：</p>
 <ul>
 <li>bootloader–&gt;kernel(initramfs)–&gt;rootfs–&gt;/sbin/init</li>
 </ul>
@@ -760,7 +760,7 @@ window.onmouseout = function () {
 <li>Client启动Linux内核</li>
 <li>Client下载安装源文件，读取自动化安装脚本</li>
 </ul>
-<h2 id="自动化之系统部署实现"><a href="#自动化之系统部署实现" class="headerlink" title="自动化之系统部署实现"></a>自动化之系统部署实现</h2><h3 id="pxe自动化安装centos6"><a href="#pxe自动化安装centos6" class="headerlink" title="pxe自动化安装centos6"></a>pxe自动化安装centos6</h3><p>&hearts;    环境构建</p>
+<h3 id="自动化之系统部署实现"><a href="#自动化之系统部署实现" class="headerlink" title="自动化之系统部署实现"></a>自动化之系统部署实现</h3><h4 id="pxe自动化安装centos6"><a href="#pxe自动化安装centos6" class="headerlink" title="pxe自动化安装centos6"></a>pxe自动化安装centos6</h4><p>&hearts;    环境构建</p>
 <ol>
 <li>安装所需要用的到软件包，并设置为自启动<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum -y install dhcp httpd tftp-server syslinux </span><br><span class="line">chkconfig tftp op</span><br><span class="line">chkconfig xinetd on </span><br><span class="line">chkconfig httpd on </span><br><span class="line">chkconfig dhcpd on </span><br><span class="line">/etc/init.d/httpd start</span><br><span class="line">/etc/init.d/xinetd</span><br></pre></td></tr></table></figure>
 </li>
@@ -785,7 +785,7 @@ window.onmouseout = function () {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> [root@nginx dhcp]$ tree /var/lib/tftpboot/</span><br><span class="line">/var/lib/tftpboot/</span><br><span class="line">├── boot.msg</span><br><span class="line">├── initrd.img</span><br><span class="line">├── pxelinux.0</span><br><span class="line">├── pxelinux.cfg</span><br><span class="line">│   └── default</span><br><span class="line">├── splash.jpg</span><br><span class="line">├── vesamenu.c32</span><br><span class="line">└── vmlinuz</span><br><span class="line"></span><br><span class="line">1 directory, 7 files</span><br><span class="line"><span class="comment">#找台同局域网的服务器开机测试</span></span><br><span class="line"><span class="comment">#安装过程中如有报 repo等错误，解决办法把cfg中的 repo禁用即可</span></span><br><span class="line"><span class="comment">##repo --name="CentOS" --baseurl=cdrom:sr0 --cost=100</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="pxe自动化安装centos7"><a href="#pxe自动化安装centos7" class="headerlink" title="pxe自动化安装centos7"></a>pxe自动化安装centos7</h3><ol>
+<h4 id="pxe自动化安装centos7"><a href="#pxe自动化安装centos7" class="headerlink" title="pxe自动化安装centos7"></a>pxe自动化安装centos7</h4><ol>
 <li><p>安装所需要的软件包、并启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sr0 /media</span><br><span class="line">yum -y install httpd tftp-server dhcp syslinux</span><br><span class="line">systemctl <span class="built_in">enable</span> httpd</span><br><span class="line">systemctl start httpd.service </span><br><span class="line">systemctl <span class="built_in">enable</span> tftp.socket</span><br><span class="line">systemctl start tftp.socket</span><br></pre></td></tr></table></figure>
 </li>
@@ -801,7 +801,7 @@ window.onmouseout = function () {
 <li><p>查看对应的服务端口是否监听，如没有问题，测试</p>
 </li>
 </ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>&hearts;  pxe安装centos6、centos7的相关文件对比</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>&hearts;  pxe安装centos6、centos7的相关文件对比</p>
 <ul>
 <li>cenots6相关文件及目录<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/lib/tftpboot/pxelinux.cfg/ </span><br><span class="line">cp  /usr/share/syslinux/pxelinux.0   /var/lib/tftpboot/ </span><br><span class="line"><span class="built_in">cd</span>  /光盘/images/pxeboot/ </span><br><span class="line">cp  vmlinuz initrd.img /var/lib/tftpboot </span><br><span class="line">Cd  /光盘/isolinux/ </span><br><span class="line">cp  boot.msg vesamenu.c32 splash.jpg /var/lib/tftpboot</span><br><span class="line">cp  /光盘/isolinux/isolinux.cfg /var/lib/tftpboot/pxelinux.cfg/default</span><br><span class="line"></span><br><span class="line">tree /var/lib/tftpboot</span><br><span class="line">/var/lib/tftpboot/ </span><br><span class="line">├── boot.msg </span><br><span class="line">├── initrd.img </span><br><span class="line">├── pxelinux.0 </span><br><span class="line">├── pxelinux.cfg </span><br><span class="line">│   └── default </span><br><span class="line">├── splash.jpg </span><br><span class="line">├── vesamenu.c32 </span><br><span class="line">└── vmlinuz </span><br><span class="line">  </span><br><span class="line">1 directory, 7 files</span><br></pre></td></tr></table></figure>
 </li>
@@ -1174,7 +1174,7 @@ window.onmouseout = function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化之系统部署介绍"><span class="nav-number">1.</span> <span class="nav-text">自动化之系统部署介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安装过程"><span class="nav-number">1.1.</span> <span class="nav-text">系统安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anaconda介绍"><span class="nav-number">1.2.</span> <span class="nav-text">anaconda介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kickstart介绍"><span class="nav-number">1.3.</span> <span class="nav-text">kickstart介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP协议"><span class="nav-number">1.4.</span> <span class="nav-text">DHCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP协议简介"><span class="nav-number">1.4.1.</span> <span class="nav-text">DHCP协议简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP协议实现"><span class="nav-number">1.4.2.</span> <span class="nav-text">DHCP协议实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PXE介绍"><span class="nav-number">1.5.</span> <span class="nav-text">PXE介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化之系统部署实现"><span class="nav-number">2.</span> <span class="nav-text">自动化之系统部署实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pxe自动化安装centos6"><span class="nav-number">2.1.</span> <span class="nav-text">pxe自动化安装centos6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pxe自动化安装centos7"><span class="nav-number">2.2.</span> <span class="nav-text">pxe自动化安装centos7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler部署"><span class="nav-number">2.4.</span> <span class="nav-text">cobbler部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler介绍"><span class="nav-number">2.4.1.</span> <span class="nav-text">cobbler介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler安装配置"><span class="nav-number">2.4.2.</span> <span class="nav-text">cobbler安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler实现部署"><span class="nav-number">2.4.3.</span> <span class="nav-text">cobbler实现部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler总结"><span class="nav-number">2.4.4.</span> <span class="nav-text">cobbler总结</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安装过程"><span class="nav-number">1.</span> <span class="nav-text">系统安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anaconda介绍"><span class="nav-number">2.</span> <span class="nav-text">anaconda介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kickstart介绍"><span class="nav-number">3.</span> <span class="nav-text">kickstart介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP协议"><span class="nav-number">4.</span> <span class="nav-text">DHCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP协议简介"><span class="nav-number">4.1.</span> <span class="nav-text">DHCP协议简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP协议实现"><span class="nav-number">4.2.</span> <span class="nav-text">DHCP协议实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PXE介绍"><span class="nav-number">5.</span> <span class="nav-text">PXE介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化之系统部署实现"><span class="nav-number">6.</span> <span class="nav-text">自动化之系统部署实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pxe自动化安装centos6"><span class="nav-number">6.1.</span> <span class="nav-text">pxe自动化安装centos6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pxe自动化安装centos7"><span class="nav-number">6.2.</span> <span class="nav-text">pxe自动化安装centos7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">6.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler部署"><span class="nav-number">7.</span> <span class="nav-text">cobbler部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler介绍"><span class="nav-number">7.1.</span> <span class="nav-text">cobbler介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler安装配置"><span class="nav-number">7.2.</span> <span class="nav-text">cobbler安装配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler实现部署"><span class="nav-number">7.3.</span> <span class="nav-text">cobbler实现部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cobbler总结"><span class="nav-number">7.4.</span> <span class="nav-text">cobbler总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1219,7 +1219,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共105k字</span>
+  <span class="post-count">博客全站共107.8k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         

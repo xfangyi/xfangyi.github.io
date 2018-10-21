@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="linuxweb," />
+  <meta name="keywords" content="linuxapp," />
 
 
 
@@ -80,15 +80,18 @@
 
 
 
-<meta name="keywords" content="linuxweb">
+<meta name="description" content="日志介绍 日志&amp;diams; 历史事件:时间，地点，人物，事件&amp;diams; 日志级别：事件的关键性程度，Loglevel 系统日志服务 sysklogd:CentOS 5之前版本&amp;diams; 事件记录格式&amp;raquo; 日期时间主机进程[pid]: 事件内容&amp;diams; C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主机的日志实现集中管理  rsyslog特性：Cen">
+<meta name="keywords" content="linuxapp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web服务篇2">
-<meta property="og:url" content="https://www.xfanyi.top/2018/09/06/web服务篇2/index.html">
+<meta property="og:title" content="日志管理">
+<meta property="og:url" content="https://www.xfanyi.top/2018/10/20/日志管理/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
+<meta property="og:description" content="日志介绍 日志&amp;diams; 历史事件:时间，地点，人物，事件&amp;diams; 日志级别：事件的关键性程度，Loglevel 系统日志服务 sysklogd:CentOS 5之前版本&amp;diams; 事件记录格式&amp;raquo; 日期时间主机进程[pid]: 事件内容&amp;diams; C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主机的日志实现集中管理  rsyslog特性：Cen">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-06T03:35:03.169Z">
+<meta property="og:updated_time" content="2018-10-21T12:08:07.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web服务篇2">
+<meta name="twitter:title" content="日志管理">
+<meta name="twitter:description" content="日志介绍 日志&amp;diams; 历史事件:时间，地点，人物，事件&amp;diams; 日志级别：事件的关键性程度，Loglevel 系统日志服务 sysklogd:CentOS 5之前版本&amp;diams; 事件记录格式&amp;raquo; 日期时间主机进程[pid]: 事件内容&amp;diams; C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主机的日志实现集中管理  rsyslog特性：Cen">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://www.xfanyi.top/2018/09/06/web服务篇2/"/>
+  <link rel="canonical" href="https://www.xfanyi.top/2018/10/20/日志管理/"/>
 
 
 
 
 
-  <title>web服务篇2 | 熊凡懿的博客</title>
+  <title>日志管理 | 熊凡懿的博客</title>
   
 
 
@@ -493,7 +496,7 @@ window.onmouseout = function () {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.xfanyi.top/2018/09/06/web服务篇2/">
+    <link itemprop="mainEntityOfPage" href="https://www.xfanyi.top/2018/10/20/日志管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="X Fan Yi">
@@ -510,7 +513,7 @@ window.onmouseout = function () {
 
         
         
-          <h1 class="post-title" itemprop="name headline">web服务篇2</h1>
+          <h1 class="post-title" itemprop="name headline">日志管理</h1>
         
 
         <div class="post-meta">
@@ -522,8 +525,8 @@ window.onmouseout = function () {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T11:34:44+08:00">
-                2018-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T14:00:32+08:00">
+                2018-10-20
               </time>
             
 
@@ -545,8 +548,8 @@ window.onmouseout = function () {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linuxweb/" itemprop="url" rel="index">
-                    <span itemprop="name">linuxweb</span>
+                  <a href="/categories/linuxapp/" itemprop="url" rel="index">
+                    <span itemprop="name">linuxapp</span>
                   </a>
                 </span>
 
@@ -576,7 +579,7 @@ window.onmouseout = function () {
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  1.4k
                 </span>
               
 
@@ -592,7 +595,7 @@ window.onmouseout = function () {
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -614,7 +617,140 @@ window.onmouseout = function () {
       
 
       
-        
+        <h3 id="日志介绍"><a href="#日志介绍" class="headerlink" title="日志介绍"></a>日志介绍</h3><ul>
+<li>日志<br>&diams; 历史事件:时间，地点，人物，事件<br>&diams; 日志级别：事件的关键性程度，Loglevel</li>
+<li>系统日志服务</li>
+<li><p>sysklogd:CentOS 5之前版本<br>&diams; 事件记录格式<br>&raquo; 日期时间主机进程[pid]: 事件内容<br>&diams; C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主机的日志实现集中管理</p>
+</li>
+<li><p>rsyslog特性：CentOS6和7<br>&diams; 多线程<br>&diams; UDP, TCP, SSL, TLS, RELP<br>&diams; MySQL, PGSQL, Oracle实现日志存储<br>&diams; 强大的过滤器，可实现过滤记录日志信息中任意部分<br>&diams; 自定义输出格式</p>
+<a id="more"></a></li>
+<li>ELK：elasticsearch, logstash, kibana<br>&diams; 非关系型分布式数据库<br>&diams; 基于apache软件基金会jakarta项目组的项目lucene<br>&diams; Elasticsearch是个开源分布式搜索引擎<br>&diams; Logstash对日志进行收集、分析，并将其存储供以后使用<br>&diams; kibana 可以提供的日志分析友好的Web 界面</li>
+</ul>
+<h3 id="rsyslog"><a href="#rsyslog" class="headerlink" title="rsyslog"></a>rsyslog</h3><p>&hearts; rsyslog介绍</p>
+<ul>
+<li><p>术语，参见man logger<br>&diams; facility：设施，从功能或程序上对日志进行归类<br>&diams; auth, authpriv, cron, daemon,ftp,kern, lpr, mail, news, security(auth), user, uucp, local0-local7, syslog</p>
+</li>
+<li><p>Priority 优先级别，从低到高排序<br>&diams; debug, info, notice, warn(warning), err(error), crit(critical), alert, emerg(panic)<br>&diams; 参看帮助：man 3 syslog</p>
+</li>
+</ul>
+<p>&hearts; rsyslog应用</p>
+<ul>
+<li>程序包：rsyslog</li>
+<li>主程序：/usr/sbin/rsyslogd</li>
+<li>CentOS 6：service rsyslog {start|stop|restart|status}</li>
+<li>CentOS 7：/usr/lib/systemd/system/rsyslog.service</li>
+<li>配置文件：/etc/rsyslog.conf，/etc/rsyslog.d/*.conf</li>
+<li>库文件：/lib64/rsyslog/*.so</li>
+<li>配置文件格式：由三部分组成<br>&diams; MODULES：相关模块配置<br>&diams; GLOBAL DIRECTIVES：全局配置<br>&diams; RULES：日志记录相关的规则配置</li>
+</ul>
+<p>&hearts; RULES</p>
+<ul>
+<li>RULES配置格式：facility.priority; facility.priority…target</li>
+<li>facility<br>&diams; *: 所有的facility<br>&diams; facility1,facility2,facility3,…：指定的facility列表</li>
+<li>priority<br>&diams; *: 所有级别<br>&diams; none：没有级别，即不记录<br>&diams; PRIORITY：指定级别（含）以上的所有级别<br>&diams; =PRIORITY：仅记录指定级别的日志信息</li>
+<li>target<br>&diams; 文件路径：通常在/var/log/，文件路径前的-表示异步写入<br>&diams; 用户：将日志事件通知给指定的用户，* 表示登录的所有用户<br>&diams; 日志服务器：@host，把日志送往至指定的远程服务器记录<br>&diams; 管道：| COMMAND，转发给其它命令处理</li>
+</ul>
+<p>&hearts;  启用网络日志服务</p>
+<ul>
+<li>通常的日志格式<br>&diams;  事件产生的日期时间主机进程(pid)：事件内容<br>&diams;  如：/var/log/messages,cron,secure等</li>
+<li>配置rsyslog成为日志服务器<br>&diams; 示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### MODULES ####</span></span><br><span class="line"><span class="comment"># Provides UDP syslog reception</span></span><br><span class="line"><span class="variable">$ModLoadimudp</span></span><br><span class="line"><span class="variable">$UDPServerRun514</span></span><br><span class="line"><span class="comment"># Provides TCP syslog reception</span></span><br><span class="line"><span class="variable">$ModLoadimtcp</span></span><br><span class="line"><span class="variable">$InputTCPServerRun514</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&hearts;  日志管理journalctl</p>
+<ul>
+<li>Systemd 统一管理所有Unit 的启动日志。带来的好处就是，可以只用journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件/etc/systemd/journald.conf</li>
+<li><p>journalctl用法</p>
+</li>
+<li><p>查看所有日志（默认情况下，只保存本次启动的日志）<br>&diams; journalctl</p>
+</li>
+<li><p>查看内核日志（不显示应用日志）<br>&diams; journalctl-k</p>
+</li>
+<li><p>查看系统本次启动的日志<br>&diams; journalctl-b<br>&diams; journalctl-b -0</p>
+</li>
+<li><p>查看上一次启动的日志（需更改设置）<br>&diams; journalctl-b -1</p>
+</li>
+<li><p>查看指定时间的日志<br>&diams; journalctl–since=”2017-10-30 18:10:30”<br>&diams; journalctl–since “20 min ago”<br>&diams; journalctl–since yesterday<br>&diams; journalctl–since “2017-01-10” –until “2017-01-11 03:00”<br>&diams; journalctl–since 09:00 –until “1 hour ago”</p>
+</li>
+<li><p>显示尾部的最新10行日志<br>&diams; journalctl-n</p>
+</li>
+<li><p>显示尾部指定行数的日志<br>&diams; journalctl-n 20</p>
+</li>
+<li><p><code>实时滚动显示最新日志</code><br>&diams; journalctl-f</p>
+</li>
+<li><p>查看指定服务的日志<br>&diams; journalctl/usr/lib/systemd/systemd</p>
+</li>
+<li><p>查看指定进程的日志<br>&diams; journalctl_PID=1</p>
+</li>
+<li><p>查看某个路径的脚本的日志<br>&diams; journalctl/usr/bin/bash</p>
+</li>
+<li><p>查看指定用户的日志<br>&diams; journalctl_UID=33 –since today</p>
+</li>
+<li><p><code>查看某个Unit 的日志</code><br>&diams; journalctl-u nginx.service<br>&diams; journalctl-u nginx.service–since today</p>
+</li>
+<li><p>实时滚动显示某个Unit 的最新日志<br>&diams; journalctl-u nginx.service-f</p>
+</li>
+<li><p>合并显示多个Unit 的日志<br>&diams; journalctl-u nginx.service-u php-fpm.service–since today</p>
+</li>
+</ul>
+<p>&hearts; rsyslog将日志记录于MySQL中</p>
+<ol>
+<li>准备MySQL Server</li>
+<li><p>在mysql server上授权rsyslog能连接至当前服务器</p>
+<ul>
+<li>GRANT ALL ON Syslog.* TO ‘USER‘@’HOST’ IDENTIFIED BY ‘PASSWORD’;</li>
+</ul>
+</li>
+<li><p>在rsyslog服务器上安装mysql模块相关的程序包</p>
+<ul>
+<li>yum install rsyslog-mysql</li>
+</ul>
+</li>
+<li>为rsyslog创建数据库及表<ul>
+<li>mysql -uUSERNAME -hHOST -pPASSWORD &lt; /usr/share/doc/rsyslog-7.4.7/mysql-createDB.sql</li>
+</ul>
+</li>
+<li>配置rsyslog将日志保存到mysql中<ul>
+<li>示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### MODULES ####</span></span><br><span class="line"><span class="variable">$ModLoadommysql</span></span><br><span class="line"><span class="comment">#### RULES ####</span></span><br><span class="line">facility.priority:ommysql:DBHOST,DBNAME,DBUSER, PASSWORD</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>&hearts; 通过loganalyzer展示数据库中的日志</p>
+<ol>
+<li>在rsyslog服务器上准备amp或nmp组合<ul>
+<li>yum install httpdphpphp-mysqlphp-gd</li>
+</ul>
+</li>
+<li><p>安装LogAnalyzer</p>
+<ul>
+<li>示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar xfloganalyzer-4.1.5.tar.gz</span><br><span class="line">cp<span class="_">-a</span> loganalyzer-4.1.5/src/var/www/html/loganalyzer</span><br><span class="line"><span class="built_in">cd</span> /var/www/html/loganalyzer</span><br><span class="line">touch config.php</span><br><span class="line">chmod666 config.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>配置loganalyzer</p>
+<ul>
+<li>示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd.service</span><br><span class="line">http://HOST/loganalyzer</span><br><span class="line">MySQL Native, Syslog Fields, Monitorware</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>安全加强</p>
+<ul>
+<li>示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/html/loganalyzer</span><br><span class="line">chmod644 config.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>&hearts;     其它的日志文件</p>
+<ul>
+<li>/var/log/secure：系统安装日志，文本格式，应周期性分析</li>
+<li>var/log/btmp：<code>当前系统上，用户的失败尝试登录相关的日志信息，二进制格式，lastb命令进行查看</code></li>
+<li>var/log/wtmp：<code>当前系统上，用户正常登录系统的相关日志信息，二进制格式，last命令可以查看</code></li>
+<li>/var/log/lastlog:每一个用户最近一次的登录信息，二进制格式，lastlog命令可以查看</li>
+<li>/var/log/dmesg：系统引导过程中的日志信息，文本格式<br>&diams; 文本查看工具查看<br>&diams; 专用命令dmesg查看</li>
+<li>/var/log/messages ：系统中大部分的信息</li>
+<li>/var/log/anaconda : anaconda的日志</li>
+</ul>
+
       
     </div>
     
@@ -672,7 +808,7 @@ window.onmouseout = function () {
       
         <div class="post-tags">
           
-            <a href="/tags/linuxweb/" rel="tag"><i class="fa fa-tag"></i> linuxweb</a>
+            <a href="/tags/linuxapp/" rel="tag"><i class="fa fa-tag"></i> linuxapp</a>
           
         </div>
       
@@ -685,8 +821,8 @@ window.onmouseout = function () {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/11/磁盘存储和文件系统/" rel="next" title="磁盘存储和文件系统">
-                <i class="fa fa-chevron-left"></i> 磁盘存储和文件系统
+              <a href="/2018/10/17/http协议与httpd/" rel="next" title="http协议与httpd">
+                <i class="fa fa-chevron-left"></i> http协议与httpd
               </a>
             
           </div>
@@ -694,10 +830,6 @@ window.onmouseout = function () {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/06/负载匀衡/" rel="prev" title="负载匀衡">
-                负载匀衡 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -754,8 +886,17 @@ window.onmouseout = function () {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -848,6 +989,22 @@ window.onmouseout = function () {
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志介绍"><span class="nav-number">1.</span> <span class="nav-text">日志介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsyslog"><span class="nav-number">2.</span> <span class="nav-text">rsyslog</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -886,7 +1043,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共105k字</span>
+  <span class="post-count">博客全站共107.8k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         
