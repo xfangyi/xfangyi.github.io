@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="熊凡懿的博客">
 <meta property="og:description" content="AWKawk介绍 awk：Aho, Weinberger, Kernighan，报告生成器，格式化文本输出 有多种版本：New awk（nawk），GNU awk（ gawk） gawk：模式扫描和处理语言 基本用法：&amp;diams;awk [options] ‘program’ var=value file&amp;diams;awk [options] -f programfile var=value">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-19T13:32:16.168Z">
+<meta property="og:updated_time" content="2018-10-22T00:12:42.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AWK">
 <meta name="twitter:description" content="AWKawk介绍 awk：Aho, Weinberger, Kernighan，报告生成器，格式化文本输出 有多种版本：New awk（nawk），GNU awk（ gawk） gawk：模式扫描和处理语言 基本用法：&amp;diams;awk [options] ‘program’ var=value file&amp;diams;awk [options] -f programfile var=value">
@@ -622,7 +622,8 @@ window.onmouseout = function () {
 <li>有多种版本：New awk（nawk），GNU awk（ gawk）</li>
 <li>gawk：模式扫描和处理语言</li>
 <li>基本用法：<br>&diams;awk [options] ‘program’ var=value file<br>&diams;awk [options] -f programfile var=value file<br>&diams;awk [options] ‘BEGIN{ action;… } pattern{ action;… } END{ action;… }’ file<br>&diams;awk 程序通常由：BEGIN语句块、能够使用模式匹配的通用语句块、END语句块，共3部<br>&diams;分组成、program通常是被单引号或双引号中</li>
-<li>选项：<br>&diams;-F 指明输入时用到的字段分隔符<br>&diams;-v var=value: 自定义变量</li>
+<li>选项：<br>&diams;-F 指明输入时用到的字段分隔符<br>&diams;-v var=value: 自定义变量<a id="more"></a>
+</li>
 </ul>
 <h4 id="awk语言"><a href="#awk语言" class="headerlink" title="awk语言"></a>awk语言</h4><ul>
 <li>基本格式：awk [options] ‘program’ file…</li>
@@ -636,8 +637,9 @@ window.onmouseout = function () {
 <li>第三步：当读至输入流末尾时，执行END{action;…}语句块</li>
 <li>BEGIN语句块在awk开始从输入流中读取行之前被执行，这是一个可选的语句块，比如<br>变量初始化、打印输出表格的表头等语句通常可以写在BEGIN语句块中</li>
 <li>END语句块在awk从输入流中读取完所有的行之后即被执行，比如打印所有行的分析<br>结果这类信息汇总都是在END语句块中完成，它也是一个可选语句块 </li>
-<li>pattern语句块中的通用命令是最重要的部分，也是可选的。如果没有提供pattern语句<br>块，则默认执行{ print }，即打印每一个读取到的行，awk读取的每一行都会执行该语句块<a id="more"></a>
-<h4 id="awk变量"><a href="#awk变量" class="headerlink" title="awk变量"></a>awk变量</h4></li>
+<li>pattern语句块中的通用命令是最重要的部分，也是可选的。如果没有提供pattern语句<br>块，则默认执行{ print }，即打印每一个读取到的行，awk读取的每一行都会执行该语句块</li>
+</ul>
+<h4 id="awk变量"><a href="#awk变量" class="headerlink" title="awk变量"></a>awk变量</h4><ul>
 <li>变量：内置和自定义变量</li>
 <li>FS：输入字段分隔符，默认为空白字符<br>&diams; awk -v FS=’:’ ‘{print $1,FS,$3}’ /etc/passwd<br>&diams; awk –F: ‘{print $1,$3,$7}’ /etc/passwd</li>
 <li>OFS：输出字段分隔符，默认为空白字符<br>&diams;  awk -v FS=‘:’ -v OFS=‘:’ ‘{print $1,$3,$7}’ /etc/passwd</li>
@@ -897,7 +899,7 @@ window.onmouseout = function () {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1025,7 +1027,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共107.8k字</span>
+  <span class="post-count">博客全站共114.9k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         

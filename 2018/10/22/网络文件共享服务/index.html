@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linuxapp," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="FTP服务篇文件传输协议FTP介绍 File Transfer Protocol 早期的三个应用级协议之一 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度  主动(PORT style)：服务器主动连接&amp;diams; 命令（控制）：客户端：随机port —&amp;gt; 服务器：tcp21&amp;diams; 数据：客户端：随机port &amp;lt;—服务器：">
+<meta name="keywords" content="linuxapp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络文件共享服务">
+<meta property="og:url" content="https://www.xfanyi.top/2018/10/22/网络文件共享服务/index.html">
+<meta property="og:site_name" content="熊凡懿的博客">
+<meta property="og:description" content="FTP服务篇文件传输协议FTP介绍 File Transfer Protocol 早期的三个应用级协议之一 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度  主动(PORT style)：服务器主动连接&amp;diams; 命令（控制）：客户端：随机port —&amp;gt; 服务器：tcp21&amp;diams; 数据：客户端：随机port &amp;lt;—服务器：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/22/网络文件共享服务/1.png">
+<meta property="og:image" content="https://www.xfanyi.top/2018/10/22/网络文件共享服务/2.png">
+<meta property="og:updated_time" content="2018-10-23T09:41:07.005Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络文件共享服务">
+<meta name="twitter:description" content="FTP服务篇文件传输协议FTP介绍 File Transfer Protocol 早期的三个应用级协议之一 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度  主动(PORT style)：服务器主动连接&amp;diams; 命令（控制）：客户端：随机port —&amp;gt; 服务器：tcp21&amp;diams; 数据：客户端：随机port &amp;lt;—服务器：">
+<meta name="twitter:image" content="https://www.xfanyi.top/2018/10/22/网络文件共享服务/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.xfanyi.top/2018/10/22/网络文件共享服务/"/>
+
+
+
+
+
+  <title>网络文件共享服务 | 熊凡懿的博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <script>
+class Circle {
+    //创建对象
+    //以一个圆为对象
+    //设置随机的 x，y坐标，r半径，_mx，_my移动的距离
+    //this.r是创建圆的半径，参数越大半径越大
+    //this._mx,this._my是移动的距离，参数越大移动
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.r = Math.random() * 10 ;
+        this._mx = Math.random() ;
+        this._my = Math.random() ;
+
+    }
+
+    //canvas 画圆和画直线
+    //画圆就是正常的用canvas画一个圆
+    //画直线是两个圆连线，为了避免直线过多，给圆圈距离设置了一个值，距离很远的圆圈，就不做连线处理
+    drawCircle(ctx) {
+        ctx.beginPath();
+        //arc() 方法使用一个中心点和半径，为一个画布的当前子路径添加一条弧。
+        ctx.arc(this.x, this.y, this.r, 0, 360)
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
+        ctx.fill();
+    }
+
+    drawLine(ctx, _circle) {
+        let dx = this.x - _circle.x;
+        let dy = this.y - _circle.y;
+        let d = Math.sqrt(dx * dx + dy * dy)
+        if (d < 150) {
+            ctx.beginPath();
+            //开始一条路径，移动到位置 this.x,this.y。创建到达位置 _circle.x,_circle.y 的一条线：
+            ctx.moveTo(this.x, this.y);   //起始点
+            ctx.lineTo(_circle.x, _circle.y);   //终点
+            ctx.closePath();
+            ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
+            ctx.stroke();
+        }
+    }
+
+    // 圆圈移动
+    // 圆圈移动的距离必须在屏幕范围内
+    move(w, h) {
+        this._mx = (this.x < w && this.x > 0) ? this._mx : (-this._mx);
+        this._my = (this.y < h && this.y > 0) ? this._my : (-this._my);
+        this.x += this._mx / 2;
+        this.y += this._my / 2;
+    }
+}
+//鼠标点画圆闪烁变动
+class currentCirle extends Circle {
+    constructor(x, y) {
+        super(x, y)
+    }
+
+    drawCircle(ctx) {
+        ctx.beginPath();
+        //注释内容为鼠标焦点的地方圆圈半径变化
+        //this.r = (this.r < 14 && this.r > 1) ? this.r + (Math.random() * 2 - 1) : 2;
+        this.r = 8;
+        ctx.arc(this.x, this.y, this.r, 0, 360);
+        ctx.closePath();
+        //ctx.fillStyle = 'rgba(0,0,0,' + (parseInt(Math.random() * 100) / 100) + ')'
+        ctx.fillStyle = 'rgba(255, 77, 54, 0.3)'
+        ctx.fill();
+
+    }
+}
+//更新页面用requestAnimationFrame替代setTimeout
+window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+let w = canvas.width = canvas.offsetWidth;
+let h = canvas.height = canvas.offsetHeight;
+let circles = [];
+let current_circle = new currentCirle(0, 0)
+
+let draw = function () {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].move(w, h);
+        circles[i].drawCircle(ctx);
+        for (j = i + 1; j < circles.length; j++) {
+            circles[i].drawLine(ctx, circles[j])
+        }
+    }
+    if (current_circle.x) {
+        current_circle.drawCircle(ctx);
+        for (var k = 1; k < circles.length; k++) {
+            current_circle.drawLine(ctx, circles[k])
+        }
+    }
+    requestAnimationFrame(draw)
+}
+
+let init = function (num) {
+    for (var i = 0; i < num; i++) {
+        circles.push(new Circle(Math.random() * w, Math.random() * h));
+    }
+    draw();
+}
+window.addEventListener('load', init(60));
+window.onmousemove = function (e) {
+    e = e || window.event;
+    current_circle.x = e.clientX;
+    current_circle.y = e.clientY;
+}
+window.onmouseout = function () {
+    current_circle.x = null;
+    current_circle.y = null;
+
+};
+</script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">熊凡懿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止尽、一直在路上</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            linux基础篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxshell">
+          <a href="/categories/linuxshell/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            shell编程篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxapp">
+          <a href="/categories/linuxapp/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            linux应用篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linuxweb">
+          <a href="/categories/linuxweb/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-internet-explorer"></i> <br />
+            
+            Web服务篇
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/sql/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-haproxy">
+          <a href="/categories/haproxy/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-h-square"></i> <br />
+            
+            负载匀衡
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cache">
+          <a href="/categories/cache/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-umbrella"></i> <br />
+            
+            缓存技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-puppet">
+          <a href="/categories/puppet/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            自动化运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/categories/docker/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            容器技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-monitor">
+          <a href="/categories/monitor/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-eye"></i> <br />
+            
+            监控技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fighter-jet"></i> <br />
+            
+            python学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essays">
+          <a href="/categories/essays/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.xfanyi.top/2018/10/22/网络文件共享服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="X Fan Yi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="熊凡懿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络文件共享服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-22T09:03:32+08:00">
+                2018-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linuxapp/" itemprop="url" rel="index">
+                    <span itemprop="name">linuxapp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+
+      
+      
+
+      
+        <h2 id="FTP服务篇"><a href="#FTP服务篇" class="headerlink" title="FTP服务篇"></a>FTP服务篇</h2><h3 id="文件传输协议FTP介绍"><a href="#文件传输协议FTP介绍" class="headerlink" title="文件传输协议FTP介绍"></a>文件传输协议FTP介绍</h3><ul>
+<li>File Transfer Protocol 早期的三个应用级协议之一</li>
+<li>基于C/S结构</li>
+<li>双通道协议：数据和命令连接</li>
+<li>数据传输格式：二进制（默认）和文本</li>
+<li><p>两种模式：服务器角度</p>
+</li>
+<li><p>主动(PORT style)：服务器主动连接<br>&diams; 命令（控制）：客户端：随机port —&gt; 服务器：tcp21<br>&diams; 数据：客户端：随机port &lt;—服务器：tcp20</p>
+<a id="more"></a></li>
+<li>被动(PASV style)：客户端主动连接<br>&diams; 命令（控制）：客户端：随机port —&gt; 服务器：tcp21<br>&diams; 数据：客户端：随机port —&gt; 服务器：随机port</li>
+<li>服务器被动模式数据端口示例<br>&diams; 227 Entering Passive Mode (172,16,0,1,224,59)<br>&diams; 服务器数据端口为：224*256+59</li>
+</ul>
+<h3 id="FTP软件介绍"><a href="#FTP软件介绍" class="headerlink" title="FTP软件介绍"></a>FTP软件介绍</h3><ul>
+<li>FTP服务器<br>&diams; Wu-ftpd，Proftpd，Pureftpd，ServU，IIS<br>&diams; vsftpd:VerySecure FTP Daemon，CentOS默认FTP服务器<br>&diams; 高速，稳定，下载速度是WU-FTP的两倍<br>&diams; ftp.redhat.com数据:单机最多可支持15000个并发</li>
+<li>客户端软件<br>&diams; ftp，lftp，lftpget，wget，curl<br>&diams; ftp -A ftpserverport -A主动模式–p 被动模式<br>&diams; lftp–u username ftpserver<br>&diams; lftpusername@ftpserver<br>&diams; lftpget<a href="ftp://ftpserver/pub/file" target="_blank" rel="noopener">ftp://ftpserver/pub/file</a></li>
+<li>状态码<br>&diams; 1XX：信息125：数据连接打开<br>&diams; 2XX：成功类状态200：命令OK 230：登录成功<br>&diams; 3XX：补充类331：用户名OK<br>&diams; 4XX：客户端错误425：不能打开数据连接<br>&diams; 5XX：服务器错误530：不能登录</li>
+<li>用户认证<br>&diams; 匿名用户：ftp,anonymous,对应Linux用户ftp<br>&diams; 系统用户：Linux用户,用户/etc/passwd,密码/etc/shadow<br>&diams; 虚拟用户：特定服务的专用用户，独立的用户/密码文件<br>&diams; nsswitch:networkservice switch名称解析框架<br>&diams; pam:pluggableauthentication module 用户认证<br>&diams; /lib64/security /etc/pam.d/ /etc/pam.conf</li>
+</ul>
+<h3 id="vsftpd服务"><a href="#vsftpd服务" class="headerlink" title="vsftpd服务"></a>vsftpd服务</h3><ul>
+<li>由vsftpd包提供</li>
+<li>不再由xinetd管理</li>
+<li>用户认证配置文件：/etc/pam.d/vsftpd</li>
+<li>服务脚本<br>&diams;  /usr/lib/systemd/system/vsftpd.service<br>&diams; /etc/rc.d/init.d/vsftpd</li>
+<li>配置文件<br>&diams; man 5 vsftpd.conf<br>&diams; 格式：option=value<br>&diams; 注意：= 前后不要有空格</li>
+<li>匿名用户（映射为系统用户ftp ）共享文件位置：/var/ftp</li>
+<li>系统用户共享文件位置：用户家目录</li>
+<li>虚拟用户共享文件位置：为其映射的系统用户的家目录</li>
+</ul>
+<h3 id="vsftpd服务配置"><a href="#vsftpd服务配置" class="headerlink" title="vsftpd服务配置"></a>vsftpd服务配置</h3><ul>
+<li>命令端口<br>&diams; listen_port=21</li>
+<li>主动模式端口<br>&diams; connect_from_port_20=YES 主动模式端口为20<br>&diams; ftp_data_port=20 （默认）指定主动模式的端口</li>
+<li><p>被动模式端口范围<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linux 客户端默认使用被动模式</span><br><span class="line">windows 客户端默认使用主动模式</span><br><span class="line">pasv_min_port=6000 0为随机分配</span><br><span class="line">pasv_max_port=6010</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用当地时间<br>&diams; use_localtime=YES 使用当地时间（默认为NO，使用GMT）</p>
+</li>
+<li>wu-ftp日志：默认启用<br>&diams; xferlog_enable=YES （默认）启用记录上传下载日志<br>&diams; xferlog_std_format=YES （默认）使用wu-ftp日志格式<br>&diams; xferlog_file=/var/log/xferlog （默认）可自动生成</li>
+<li>vsftpd日志：默认不启用<br>&diams; dual_log_enable=YES 使用vsftpd日志格式，默认不启用<br>&diams; vsftpd_log_file=/var/log/vsftpd.log（默认）可自动生成</li>
+<li>登录提示信息<br>&diams; ftpd_banner=“welcometo fang ftp server”<br>&diams; banner_file=/etc/vsftpd/ftpbanner.txt 优先上面项生效</li>
+<li>目录访问提示信息<br>&diams; dirmessage_enable=YES (默认)<br>&diams; message_file=.message(默认) 信息存放在指定目录下.message</li>
+<li>使用pam(Pluggable Authentication Modules)完成用户认证<br>&diams; pam_service_name=vsftpd<br>&diams; pam配置文件:/etc/pam.d/vsftpd<br>&diams; /etc/vsftpd/ftpusers 默认文件中用户拒绝登录</li>
+<li>是否启用控制用户登录的列表文件<br>&diams; userlist_enable=YES 默认有此设置<br>&diams; userlist_deny=YES(默认值) 黑名单,不提示口令，NO为白名单<br>&diams; userlist_file=/etc/vsftpd/users_list 此为默认值</li>
+<li>vsftpd服务指定用户身份运行<br>&diams; nopriv_user=nobody (默认值)</li>
+<li>连接数限制<br>&diams; max_clients=0 最大并发连接数<br>&diams; max_per_ip=0 每个IP同时发起的最大连接数</li>
+<li>传输速率：字节/秒<br>&diams; anon_max_rate=0 匿名用户的最大传输速率<br>&diams; local_max_rate=0 本地用户的最大传输速率</li>
+<li>连接时间：秒为单位<br>&diams; connect_timeout=60 主动模式数据连接超时时长<br>&diams; accept_timeout=60 被动模式数据连接超时时长<br>&diams;  data_connection_timeout=300 数据连接无数据输超时时长<br>&diams; idle_session_timeout=60 无命令操作超时时长</li>
+<li>优先以文本方式传输<br>&diams;  ascii_upload_enable=YES<br>&diams; ascii_download_enable=YES</li>
+</ul>
+<h3 id="匿名用户"><a href="#匿名用户" class="headerlink" title="匿名用户"></a>匿名用户</h3><ul>
+<li>匿名用户<br>&diams; 示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES 		支持匿名用户</span><br><span class="line">no_anon_password=默认YES	匿名用户略过口令检查</span><br><span class="line">anon_world_readable_only 	(默认YES)只能下载全部读的文件</span><br><span class="line">anon_upload_enable=YES 		匿名上传，注意:文件系统权限</span><br><span class="line">anon_mkdir_write_enable=YES 	匿名建目录</span><br><span class="line">anon_umask=0333 		指定匿名上传文件的<span class="built_in">umask</span>，默认077</span><br><span class="line">anon_other_write_enable=YES 	可删除和修改上传的文件</span><br><span class="line">指定上传文件的默认的所有者和权限</span><br><span class="line">chown_uploads=YES(默认NO)</span><br><span class="line">chown_username=fang</span><br><span class="line">chown_upload_mode=0644</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Linux系统用户"><a href="#Linux系统用户" class="headerlink" title="Linux系统用户"></a>Linux系统用户</h3><ul>
+<li><p>Linux系统用户配置详解<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES 	是否允许linux用户登录</span><br><span class="line">write_enable=YES 	允许linux用户上传文件</span><br><span class="line">local_umask=022 	指定系统用户上传文件的默认权限</span><br><span class="line">guest_enable=YES 	所有系统用户都映射成guest用户</span><br><span class="line">guest_username=ftp 	配合上面选项才生效，指定guest用户</span><br><span class="line">local_root=/ftproot 	guest用户登录所在目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁锢所有系统用户在家目录中<br>&diams; chroot_local_user=YES（默认NO，不禁锢）禁锢系统用户</p>
+</li>
+<li>禁锢或不禁锢特定的系统用户在家目录中，与上面设置功能相反<br>&diams; 示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chroot_list_enable=YES</span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line">当chroot_local_user=YES时，		则chroot_list中用户不禁锢</span><br><span class="line">当chroot_local_user=NO时，		则chroot_list中用户禁锢</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="vsftpd虚拟用户"><a href="#vsftpd虚拟用户" class="headerlink" title="vsftpd虚拟用户"></a>vsftpd虚拟用户</h3><ul>
+<li>虚拟用户<br>&diams; 所有虚拟用户会统一映射为一个指定的系统帐号：访问共享位置，即为此系统帐号的家目录<br>&diams; 各虚拟用户可被赋予不同的访问权限，通过匿名用户的权限控制参数进行指定</li>
+<li><p>虚拟用户帐号的存储方式</p>
+</li>
+<li><p>文件<br>&diams; 编辑文本文件，此文件需要被编码为hash格式<br>&diams; 奇数行为用户名，偶数行为密码<br>&diams; db_load -T -t hash -f vusers.txt vusers.db</p>
+</li>
+<li><p>关系型数据库中的表中<br>&diams; 实时查询数据库完成用户认证<br>&diams; mysql库：pam要依赖于pam-mysql<br>&diams; /lib64/security/pam_mysql.so<br>&diams; /usr/share/doc/pam_mysql-0.7/README</p>
+</li>
+</ul>
+<h4 id="文件验证实现"><a href="#文件验证实现" class="headerlink" title="文件验证实现"></a>文件验证实现</h4><ol>
+<li><p>创建用户数据库文件<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vusers.txt</span><br><span class="line">xiong</span><br><span class="line">xiongpass</span><br><span class="line">fang</span><br><span class="line">fangpass</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /etc/vsftpd/</span><br><span class="line">db_load-T -t <span class="built_in">hash</span> -f vusers.txt vusers.db</span><br><span class="line">chmod600 vusers.db</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建用户和访问FTP目录<br>&diams; 示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">useradd -d /var/ftproot -s /sbin/nologin vuser</span><br><span class="line">chmod +rx /var/ftproot/</span><br><span class="line"></span><br><span class="line">centos7  还需要执行以下操作：</span><br><span class="line">chmod  -w /var/ftproot/</span><br><span class="line">mkdir  /var/ftproot/upload</span><br><span class="line">setfacl-m u:vuser:rwx /var/ftproot/upload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建pam配置文件<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd.db</span><br><span class="line">authrequired pam_userdb.so db=/etc/vsftpd/vusers</span><br><span class="line">account required pam_userdb.so db=/etc/vsftpd/vusers</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定pam配置文件<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=vuser</span><br><span class="line">pam_service_name=vsftpd.db</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SELinux设置<br>&diams; setenforce 0</p>
+</li>
+<li>虚拟用户建立独立的配置文件<br>&diams; 示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mdkir/etc/vsftpd/vusers.d/ 创建配置文件存放的路径</span><br><span class="line"></span><br><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">user_config_dir=/etc/vsftpd/vusers.d/</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /etc/vsftpd/vusers.d/ 进入此目录</span><br><span class="line">允许xiong用户可读写，其它用户只读</span><br><span class="line">vim xiong 			创建各用户自已的配置文件</span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br><span class="line">anon_other_write_enable=YES</span><br><span class="line"></span><br><span class="line">vim fang 创建各用户自已的配置文件</span><br><span class="line">local_root=/ftproot 登录目录改变至指定的目录</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="MYSQL验证"><a href="#MYSQL验证" class="headerlink" title="MYSQL验证"></a>MYSQL验证</h4><ul>
+<li>本实验在两台CentOS主机上实现，一台做为FTP服务器，一台做数据库服务</li>
+</ul>
+<ol>
+<li><p>安装所需要包和包组<br>&diams; 示例 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">在数据库服务器上安装包：</span><br><span class="line">Centos7：在数据库服务器上安装</span><br><span class="line">yum –y install mariadb-server</span><br><span class="line">systemctlstart mariadb.service</span><br><span class="line">systemctlenable mariadb</span><br><span class="line"></span><br><span class="line">Centos6：在数据库服务器上安装</span><br><span class="line">yum –y install mysql-server</span><br><span class="line"></span><br><span class="line">在FTP服务器上安装vsftpd和pam_mysql包</span><br><span class="line">centos6：pam_mysql由epel6的源中提供</span><br><span class="line">yum install vsftpdpam_mysql</span><br><span class="line"></span><br><span class="line">centos7：无对应rpm包，需手动编译安装</span><br><span class="line">yum -y groupinstall<span class="string">"Development Tools"</span></span><br><span class="line">yum -y install mariadb-develpam-develvsftpd</span><br><span class="line"></span><br><span class="line">下载pam_mysql-0.7RC1.tar.gz</span><br><span class="line">tar xvfpam_mysql-0.7RC1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> pam_mysql-0.7RC1/</span><br><span class="line">./configure --with-pam-mods-dir=/lib64/security --with-mysql=/usr--with-pam=/usr</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数据库服务器上创建虚拟用户账号</p>
+<ol>
+<li><p>建立存储虚拟用户数据库和连接的数据库用户<br>&diams; mysql&gt; CREATE DATABASE vsftpd;<br>&diams; mysql&gt; SHOW DATABASES;</p>
+<ul>
+<li><p>ftp服务和mysql不在同一主机<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@<span class="string">'172.16.%.%'</span> IDENTIFIED BY <span class="string">'xiong'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ftp服务和mysql在同一主机<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;diams; mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@localhostIDENTIFIED BY <span class="string">'xiong'</span>;</span><br><span class="line">&amp;diams; mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@<span class="string">'127.0.0.1'</span> IDENTIFIED BY <span class="string">'xiong'</span>;</span><br><span class="line">&amp;diams; mysql&gt; FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>准备相关表<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE vsftpd;</span><br><span class="line">Mysql&gt; SHOW TABLES;</span><br><span class="line">mysql&gt; CREATE TABLE users (</span><br><span class="line">id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,</span><br><span class="line">name CHAR(50) BINARY NOT NULL,</span><br><span class="line">password CHAR(48) BINARY NOT NULL</span><br><span class="line">);</span><br><span class="line">mysql&gt;DESC users;</span><br><span class="line">测试连接</span><br><span class="line">mysql-uvsftpd-h mysqlserver-pxiong</span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加虚拟用户<br>&diams; 根据需要添加所需要的用户，为了安全应该使用PASSWORD函数加密其密码后存储<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DESC users;</span><br><span class="line">mysql&gt; INSERT INTOusers(name,password) values(‘xiong<span class="string">',password('</span>fang<span class="string">'));</span></span><br><span class="line"><span class="string">mysql&gt; INSERT INTOusers(name,password) values(‘fang'</span>,password(<span class="string">'fang'</span>));</span><br><span class="line">mysql&gt; SELECT * FROM users;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>在FTP服务器上配置vsftpd服务</p>
+<ol>
+<li><p>在FTP服务器上建立pam认证所需文件<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/pam.d/vsftpd.mysql 添加如下两行</span><br><span class="line">auth required pam_mysql.so user=vsft pdpasswd=fang host=mysqlserver db=vsftpd table=users usercolumn=name passwdcolumn=password crypt=2</span><br><span class="line">account required pam_mysql.so user=vsftp dpasswd=fang host=mysqlserver db=vsftpd table=users usercolumn=name passwdcolumn=password crypt=2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>.建立相应用户和修改vsftpd配置文件，使其适应mysql认证建立虚拟用户映射的系统用户及对应的目录<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">建立虚拟用户映射的系统用户及对应的目录</span><br><span class="line">useradd -s /sbin/nologin -d /var/ftproot vuser</span><br><span class="line">chmod 555 /var/ftproot centos7 需除去ftp根目录的写权限</span><br><span class="line">mkdir/var/ftproot/&#123;upload,pub&#125;</span><br><span class="line">setfacl –m u:vuser:rwx /var/ftproot/upload</span><br><span class="line">确保/etc/vsftpd.conf中已经启用了以下选项</span><br><span class="line">anonymous_enable=YES</span><br><span class="line">添加下面两项</span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=vuser</span><br><span class="line">修改下面一项，原系统用户无法登录</span><br><span class="line">pam_service_name=vsftpd.mysql</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>启动vsftpd服务<br> &diams; service vsftpdstart;systemctlstart vsftpd<br> &diams; chkconfigvsftpdon;systemctlenable vsftpd<br> &diams; 查看端口开启情况<br> &diams; netstat-tnlp|grep :21</p>
+</li>
+<li>Selinux相关设置：在FTP服务器上执行<br> &diams; restorecon-R /lib64/security<br> &diams; setsebool-P ftpd_connect_db1<br> &diams; setsebool-P ftp_home_dir1<br> &diams; chcon -R -t public_content_rw_t /var/ftproot/</li>
+<li>测试：利用FTP客户端工具,以虚拟用户登录验证结果<br> &diams; tail /var/log/secure</li>
+<li><p>在FTP服务器上配置虚拟用户具有不同的访问权限</p>
+<ol>
+<li><p>配置vsftpd为虚拟用户使用配置文件目录<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">添加如下选项</span><br><span class="line">user_config_dir=/etc/vsftpd/vusers_config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建所需要目录，并为虚拟用户提供配置文件<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir/etc/vsftpd/vusers_config/</span><br><span class="line"><span class="built_in">cd</span> /etc/vsftpd/vusers_config/</span><br><span class="line">touch xiong fang</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置虚拟用户的访问权限<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">anon_upload_enable=&#123;YES|NO&#125;</span><br><span class="line">anon_mkdir_write_enable=&#123;YES|NO&#125;</span><br><span class="line">anon_other_write_enable=&#123;YES|NO&#125;</span><br><span class="line">local_root=/ftproot 登录目录改变至指定的目录</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="NFS服务篇"><a href="#NFS服务篇" class="headerlink" title="NFS服务篇"></a>NFS服务篇</h2><h3 id="NFS服务介绍"><a href="#NFS服务介绍" class="headerlink" title="NFS服务介绍"></a>NFS服务介绍</h3><ul>
+<li>NFS：Network File System 网络文件系统，基于内核的文件系统。Sun公司<br>开发，通过使用NFS，用户和程序可以像访问本地文件一样访问远端系统上的<br>文件，基于RPC（Remote Procedure Call Protocol远程过程调用）实现</li>
+<li>RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参数的调用信息<br>到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用<br>信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发<br>送答复信息，然后等待下一个调用信息，最后，客户端调用进程接收答复信<br>息，获得进程结果，然后调用执行继续进行</li>
+<li>NFS优势：节省本地存储空间，将常用的数据,如home目录,存放在NFS服务<br>器上且可以通过网络访问，本地终端将可减少自身存储空间的使用</li>
+<li>工作原理示图<br><img src="/2018/10/22/网络文件共享服务/1.png" alt="jpeg"></li>
+<li>NFS各个版本的对比<br><img src="/2018/10/22/网络文件共享服务/2.png" alt="jpeg"></li>
+</ul>
+<h3 id="NFS应用"><a href="#NFS应用" class="headerlink" title="NFS应用"></a>NFS应用</h3><ul>
+<li>软件包：nfs-utils</li>
+<li>Kernel支持:nfs.ko</li>
+<li>端口：2049(nfsd), 其它端口由portmap(111)分配</li>
+<li>配置文件：/etc/exports,/etc/exports.d/*.exports</li>
+<li>CentOS7不支持同一目录同时用nfs和samba共享，因为使用锁机制不同</li>
+<li>相关软件包:rpcbind（必须），tcp_wrappers</li>
+<li>CentOS6开始portmap进程由rpcbind代替</li>
+<li>NFS服务主要进程<br>&diams; rpc.nfsd 最主要的NFS进程，管理客户端是否可登录<br>&diams; rpc.mountd 挂载和卸载NFS文件系统，包括权限管理<br>&diams; rpc.lockd 非必要，管理文件锁，避免同时写出错<br>&diams; rpc.statd 非必要，检查文件一致性，可修复文件</li>
+<li>日志：/var/lib/nfs/</li>
+</ul>
+<h3 id="NFS配置文件"><a href="#NFS配置文件" class="headerlink" title="NFS配置文件"></a>NFS配置文件</h3><ul>
+<li>导出的文件系统的格式<br>&diams; /dir 主机1(opt1,opt2) 主机2(opt1,opt2)…</li>
+<li>#开始为注释</li>
+<li>主机格式<br>&diams; 单个主机：ipv4，ipv6，FQDN<br>&diams; IP networks：两种掩码格式均支持<br>&diams; 172.18.0.0/255.255.0.0<br>&diams; 172.18.0.0/16<br>&diams; wildcards：主机名通配，例如*.fang.com，IP不可以<br>&diams; netgroups：NIS域的主机组，@group_nam<br>&diams; anonymous：表示使用*通配所有客户端</li>
+<li><p>在/etc/exports文件中定义导出目录<br>&diams; /mysharediskless.example.com(rw,no_root_squash)<br>&diams; /data/nfs2 192.168.11.0/24(ro,no_root_squash,all_squash) <code>192.168.11.8(rw)</code></p>
+</li>
+<li><p>每个条目指定目录导出到的哪些主机，及相关的权限和选项<br>&diams; 默认选项：(ro,sync,root_squash,no_all_squash)<br>&diams; ro,rw 只读和读写<br>&diams; async 异步，数据变化后不立即写磁盘，性能高<br>&diams; sync（1.0.0后为默认）同步，数据在请求时立即写入共享<br>&diams; no_all_squash （默认）保留共享文件的UID和GID<br>&diams; all_squash 所有远程用户(包括root)都变成nfsnobody<br>&diams; root_squash （默认）远程root映射为nfsnobody,UID为65534，早期版本是4294967294 (nfsnobody)<br>&diams; no_root_squash 远程root映射成root用户<br>&diams; anonuid和anongid 指明匿名用户映射为特定用户UID和组GID，而非nfsnobody,可配合all_squash使用</p>
+</li>
+</ul>
+<h3 id="NFS工具"><a href="#NFS工具" class="headerlink" title="NFS工具"></a>NFS工具</h3><ul>
+<li>rpcinfo<br>&diams; rpcinfo-p hostname<br>&diams; rpcinfo–s hostname 查看RPC注册程序</li>
+<li>exportfs<br>&diams; –v 查看本机所有NFS共享<br>&diams; <code>–r 重读配置文件，并共享目录</code><br>&diams; –a 输出本机所有共享<br>&diams; –au 停止本机所有共享</li>
+<li><code>showmount-e hostname</code></li>
+<li>mount.nfs 挂载工具</li>
+<li>NFSv4支持通过挂载NFS服务器的共享“根”，从而浏览NFS服务器上的共享目录列表</li>
+</ul>
+<h3 id="客户端NFS挂载"><a href="#客户端NFS挂载" class="headerlink" title="客户端NFS挂载"></a>客户端NFS挂载</h3><ul>
+<li>基于安全考虑，建议使用nosuid,nodev,noexec挂载选项</li>
+<li>NFS相关的挂载选项<br>&diams; fg（默认）前台挂载，bg后台挂载<br>&diams; hard（默认）持续请求，soft 非持续请求<br>&diams; intr 和hard配合，请求可中断<br>&diams; rsize和wsize 一次读和写数据最大字节数，rsize=32768<br>&diams; <code>_netdev 无网络不挂载</code></li>
+<li>示例<br>&diams; mount -o rw,nosuid,fg,hard,intr172.16.0.1:/testdir/mnt/nfs/</li>
+<li>开机挂载:/etc/fstab<br>&diams; 172.16.0.1:/public /mnt/nfs nfs defaults 0 0</li>
+</ul>
+<h3 id="实现NFS服务"><a href="#实现NFS服务" class="headerlink" title="实现NFS服务"></a>实现NFS服务</h3><ul>
+<li>centos7环境<br>&diams; 示例<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nfs-server</span><br><span class="line">systemctl <span class="built_in">enable</span> nfs-server</span><br><span class="line">mkdir /nfsshare</span><br><span class="line">chown nfsnobody /nfsshare</span><br><span class="line">vi /etc/exports</span><br><span class="line">/nfsshare desktopX(rw)</span><br><span class="line">exporfs –r</span><br><span class="line">mkdir /mnt/nfsshare</span><br><span class="line">mount serverX:/nfsshare /mnt/nfsshare</span><br><span class="line">vim /etc/fstab</span><br><span class="line">nfsserver:/nfsshare /mnt/nfsshare nfs defaults 0 0</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="实现NFS伪根"><a href="#实现NFS伪根" class="headerlink" title="实现NFS伪根"></a>实现NFS伪根</h3><ul>
+<li><p>配置NFS服务器<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br><span class="line">/data/<span class="built_in">read</span> /exports/<span class="built_in">read</span> none <span class="built_in">bind</span> 0 0</span><br><span class="line">/data2/write /exports/write none <span class="built_in">bind</span> 0 0</span><br><span class="line">vi /etc/exports</span><br><span class="line">/exports *(fsid=0,ro,crossmnt)</span><br><span class="line">/exports/<span class="built_in">read</span> 192.168.0.0/24(ro)</span><br><span class="line">/exports/write 192.168.0.0/24(rw)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置NFS客户端<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount nfsserver:/ /mnt/nfs</span><br><span class="line">vi /etc/fstab</span><br><span class="line">nfsserver:/ /mnt/ nfs4 ro 0 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="SAMBA服务篇"><a href="#SAMBA服务篇" class="headerlink" title="SAMBA服务篇"></a>SAMBA服务篇</h2><h3 id="SAMBA服务简介"><a href="#SAMBA服务简介" class="headerlink" title="SAMBA服务简介"></a>SAMBA服务简介</h3><ul>
+<li>SMB：Server Message Block服务器消息块，IBM发布，最早是DOS网络文件共享协议</li>
+<li>Cifs：common internet file system，微软基于SMB发布</li>
+<li>SAMBA:1991年Andrew Tridgell,实现windows和UNIX相通</li>
+<li>SAMBA的功能<br>&diams; 共享文件和打印，实现在线编辑<br>&diams; 实现登录SAMBA用户的身份认证<br>&diams; 可以进行NetBIOS名称解析<br>&diams; 外围设备共享</li>
+<li>计算机网络管理模式<br>&diams; 工作组WORKGROUP：计算机对等关系，帐号信息各自管理<br>&diams; 域DOMAIN:C/S结构，帐号信息集中管理，DC,AD</li>
+</ul>
+<h3 id="相关包与进程"><a href="#相关包与进程" class="headerlink" title="相关包与进程"></a>相关包与进程</h3><ul>
+<li>相关包<br>&diams; Samba 提供smb服务<br>&diams; Samba-client 客户端软件<br>&diams; samba-common 通用软件<br>&diams; cifs-utils smb客户端工具<br>&diams; samba-winbind 和AD相关</li>
+<li>相关服务进程<br>&diams; smbd 提供smb（cifs）服务TCP:139,445<br>&diams; nmbd NetBIOS名称解析UDP:137,138</li>
+<li>主配置文件：/etc/samba/smb.conf<br>&diams; 帮助参看：man smb.conf</li>
+<li>语法检查：testparm [-v] [/etc/samba/smb.conf]</li>
+<li>客户端工具：smbclient,mount.cifs</li>
+</ul>
+<h3 id="管理SAMBA用户"><a href="#管理SAMBA用户" class="headerlink" title="管理SAMBA用户"></a>管理SAMBA用户</h3><ul>
+<li>添加samba用户<br>&diams; smbpasswd -a &lt; user&gt;<br>&diams; pdbedit -a -u &lt; user&gt;</li>
+<li>修改用户密码<br>&diams; smbpasswd &lt; user&gt;</li>
+<li>删除用户和密码<br>&diams; smbpasswd –x &lt; user&gt;<br>&diams; dbedit –x –u &lt; user&gt;</li>
+<li>查看samba用户列表<br>&diams; /var/lib/samba/private/passdb.tdb<br>&diams; pdbedit –L –v</li>
+<li><p>查看samba服务器状态<br>&diams; smbstatus</p>
+</li>
+<li><p>每个共享目录应该有独立的[ ]部分<br>&diams; [共享名称] 远程网络看到的共享名称<br>&diams; comment 注释信息<br>&diams; path 所共享的目录路径<br>&diams; public 能否被guest访问的共享，默认no，和guest ok 类似<br>&diams; browsable 是否允许所有用户浏览此共享,默认为yes,no为隐藏<br>&diams; writable=yes 可以被所有用户读写，默认为no<br>&diams; read only=no 和writable=yes等价，如与以上设置冲突，放在后面的设置生效，默认只读<br>&diams; write list 三种形式：用户，@组名，+组名,用，分隔如writable=no，列表中用户或组可读写，不在列表中用户只读<br>&diams; valid users 特定用户才能访问该共享，如为空，将允许所有用户，用户名之间用空格分隔</p>
+</li>
+<li><p>基于特定用户和组的共享<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/samba/smb.conf</span><br><span class="line">[share]</span><br><span class="line">path = /app/dir</span><br><span class="line">valid users=xiong,@admins</span><br><span class="line">writeable = no</span><br><span class="line">browseable= no</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="实现SMB共享"><a href="#实现SMB共享" class="headerlink" title="实现SMB共享"></a>实现SMB共享</h3><ol>
+<li>在samba服务器上安装samba包<br> &diams; yum -y install samba</li>
+<li><p>创建samba用户和组<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">groupadd-r admins</span><br><span class="line">useradd<span class="_">-s</span> /sbin/nologin-G admins fang</span><br><span class="line">smbpasswd -a fang</span><br><span class="line">useradd -s /sbin/nologin xiong</span><br><span class="line">smbpasswd -a xiong</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建samba共享目录<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir/testdir/smbshare</span><br><span class="line">chgrpadmins /testdir/smbshare</span><br><span class="line">chmod2775 /testdir/smbshare</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>samba服务器配置<br>&diams; 示例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/samba/smb.conf</span><br><span class="line">security = user</span><br><span class="line">passdbbackend = tdbsam</span><br><span class="line">[share]</span><br><span class="line">path = /testdir/smbshare</span><br><span class="line">write list = @admins</span><br><span class="line">systemctlstart smbnmb</span><br><span class="line">systemctlenable smbnmb</span><br><span class="line">firewall-cmd--permanent --add-service=samba</span><br><span class="line">firewall-cmd--reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>samba客户端访问<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">安装包</span><br><span class="line">yum -y install cifs-utils</span><br><span class="line">用fang用户挂载smb共享并访问</span><br><span class="line">mkdir/mnt/fang</span><br><span class="line">mount -o username=fang //smbserver/share /mnt/fang</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Hello fang"</span> &gt;/mnt/fang/fangfile.txt</span><br><span class="line">用xiong用户挂载smb共享并访问</span><br><span class="line">mkdir/mnt/xiong</span><br><span class="line">mount -o username=xiong //smbserver/share /mnt/xiong</span><br><span class="line">touch /mnt/xiong/xiongfile.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="多用户SMB挂载"><a href="#多用户SMB挂载" class="headerlink" title="多用户SMB挂载"></a>多用户SMB挂载</h3><ol>
+<li><p>samba服务器配置<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install samba</span><br><span class="line">mkdir/multiuser</span><br><span class="line">vim /etc/samba/smb.conf</span><br><span class="line">[smbshare]</span><br><span class="line">path=/multiuser</span><br><span class="line">writable=no</span><br><span class="line">write list= @admins</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>samba服务器创建samba用户<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useradd–s /sbin/nologinsmbuser</span><br><span class="line">smbpasswd–a smbuser</span><br><span class="line">useradd–s /sbin/nologin–G admins fang</span><br><span class="line">smbpasswd–a fang</span><br><span class="line">useradd–s /sbin/nologinxiong</span><br><span class="line">smbpasswd–a xiong</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>samba服务器设置目录权限<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对fang,admins组分配目录读写权限</span><br><span class="line">chmod777 /testdir/multiuser</span><br><span class="line">或者</span><br><span class="line">setfacl–m u:fang:rwx /testdir/multiuser</span><br><span class="line">setfacl–m g:admins:rwx /testdir/multiuser</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>samba客户端启用多用户挂载<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum -y install cifs-utils</span><br><span class="line">mkdir/mnt/smb</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'username=smbuser'</span> &gt;/etc/multiuser</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'password=centos'</span> &gt;&gt;/etc/multiuser</span><br><span class="line">chmod600 /etc/multiuser</span><br><span class="line">以多用户方式挂载：</span><br><span class="line">vim /etc/fstab</span><br><span class="line">//smbserver/smbshare/mnt/smbcifs</span><br><span class="line">credentials=/etc/multiuser,multiuser0 0</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在samba客户端用实现多用户访问<br> &diams; 示例</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">useraddfang;useraddxiong</span><br><span class="line">用root访问</span><br><span class="line">ls /mnt/smb;touch /mnt/smb/root.txt</span><br><span class="line">用fang访问</span><br><span class="line">ls /mnt/smb;touch /mnt/smb/fang.txt</span><br><span class="line">cifscredsadd –u fang smbserver</span><br><span class="line">touch /mnt/smb/fang.txt</span><br><span class="line">用xiong访问</span><br><span class="line">cifscredsadd –u xiong smbserver</span><br><span class="line">ls /mnt/smb</span><br><span class="line">touch /mnt/smb/xiong.txt</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+
+<div>
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-heart"></i> 感谢阅读-------------</div>
+    
+</div>
+</div>
+ 
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="X Fan Yi 微信打赏"/>
+        <p>微信打赏</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="X Fan Yi 支付宝打赏"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linuxapp/" rel="tag"><i class="fa fa-tag"></i> linuxapp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/20/日志管理/" rel="next" title="日志管理">
+                <i class="fa fa-chevron-left"></i> 日志管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/24/Linux防火墙/" rel="prev" title="Linux防火墙">
+                Linux防火墙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTg5OS8xNjQyNg=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="X Fan Yi" />
+            
+              <p class="site-author-name" itemprop="name">X Fan Yi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://scholar.google.com.hk" target="_blank" title="谷歌学术">
+                      
+                        <i class="fa fa-fw fa-google-plus"></i>谷歌学术</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zh.wikipedia.org" target="_blank" title="维基百科">
+                      
+                        <i class="fa fa-fw fa-wikipedia-w"></i>维基百科</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FTP服务篇"><span class="nav-number">1.</span> <span class="nav-text">FTP服务篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件传输协议FTP介绍"><span class="nav-number">1.1.</span> <span class="nav-text">文件传输协议FTP介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP软件介绍"><span class="nav-number">1.2.</span> <span class="nav-text">FTP软件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd服务"><span class="nav-number">1.3.</span> <span class="nav-text">vsftpd服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd服务配置"><span class="nav-number">1.4.</span> <span class="nav-text">vsftpd服务配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名用户"><span class="nav-number">1.5.</span> <span class="nav-text">匿名用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux系统用户"><span class="nav-number">1.6.</span> <span class="nav-text">Linux系统用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd虚拟用户"><span class="nav-number">1.7.</span> <span class="nav-text">vsftpd虚拟用户</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件验证实现"><span class="nav-number">1.7.1.</span> <span class="nav-text">文件验证实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MYSQL验证"><span class="nav-number">1.7.2.</span> <span class="nav-text">MYSQL验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NFS服务篇"><span class="nav-number">2.</span> <span class="nav-text">NFS服务篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS服务介绍"><span class="nav-number">2.1.</span> <span class="nav-text">NFS服务介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS应用"><span class="nav-number">2.2.</span> <span class="nav-text">NFS应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">NFS配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS工具"><span class="nav-number">2.4.</span> <span class="nav-text">NFS工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端NFS挂载"><span class="nav-number">2.5.</span> <span class="nav-text">客户端NFS挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现NFS服务"><span class="nav-number">2.6.</span> <span class="nav-text">实现NFS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现NFS伪根"><span class="nav-number">2.7.</span> <span class="nav-text">实现NFS伪根</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAMBA服务篇"><span class="nav-number">3.</span> <span class="nav-text">SAMBA服务篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SAMBA服务简介"><span class="nav-number">3.1.</span> <span class="nav-text">SAMBA服务简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关包与进程"><span class="nav-number">3.2.</span> <span class="nav-text">相关包与进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理SAMBA用户"><span class="nav-number">3.3.</span> <span class="nav-text">管理SAMBA用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现SMB共享"><span class="nav-number">3.4.</span> <span class="nav-text">实现SMB共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多用户SMB挂载"><span class="nav-number">3.5.</span> <span class="nav-text">多用户SMB挂载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">X Fan Yi</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+ <!-- <span class="post-meta-divider">|</span>-->
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共114.9k字</span>
+</div>
+<p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 您是第
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      位来访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  <div class="bg_content">
+    <canvas id="canvas"></canvas>
+</div>
+
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现，允许位于不同主机（或同">
+<meta name="description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图">
 <meta name="keywords" content="linuxweb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http协议与httpd">
 <meta property="og:url" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
-<meta property="og:description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现，允许位于不同主机（或同">
+<meta property="og:description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/1.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/2.png">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/5.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/6.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/7.png">
-<meta property="og:updated_time" content="2018-10-21T11:56:34.699Z">
+<meta property="og:updated_time" content="2018-10-22T00:08:11.029Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http协议与httpd">
-<meta name="twitter:description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图  &amp;hearts; Socket套接字介绍  Socket:套接字，进程间通信IPC的一种实现，允许位于不同主机（或同">
+<meta name="twitter:description" content="Socket套接字&amp;hearts;  跨网络的主机间通讯  在建立通信连接的每一端，进程间的传输要有两个标志 IP地址和端口号，合称为套接字地址 socket address 客户机套接字地址定义了一个唯一的客户进程 服务器套接字地址定义了一个唯一的服务器进程&amp;diams; 示图">
 <meta name="twitter:image" content="https://www.xfanyi.top/2018/10/17/http协议与httpd/1.png">
 
 
@@ -633,7 +633,8 @@ window.onmouseout = function () {
 <li>在建立通信连接的每一端，进程间的传输要有两个标志</li>
 <li>IP地址和端口号，合称为套接字地址 socket address</li>
 <li>客户机套接字地址定义了一个唯一的客户进程</li>
-<li>服务器套接字地址定义了一个唯一的服务器进程<br>&diams; 示图<br><img src="/2018/10/17/http协议与httpd/1.png" alt="jpeg"></li>
+<li>服务器套接字地址定义了一个唯一的服务器进程<br>&diams; 示图<br><img src="/2018/10/17/http协议与httpd/1.png" alt="jpeg"><a id="more"></a>
+</li>
 </ul>
 <p>&hearts; Socket套接字介绍</p>
 <ul>
@@ -643,8 +644,9 @@ window.onmouseout = function () {
 <li><p>Socket Domain：根据其所使用的地址<br>&diams; AF_INET：Address Family，IPv4<br>&diams; AF_INET6：IPv6<br>&diams; AF_UNIX：同一主机上不同进程之间通信时使用</p>
 </li>
 <li><p>Socket Type：根据使用的传输层协议<br>&diams; SOCK_STREAM：流，tcp套接字，可靠地传递、面向连接<br>&diams; SOCK_DGRAM：数据报，udp套接字，不可靠地传递、无连接<br>&diams; SOCK_RAW: 裸套接字,无须tcp或udp,APP直接通过IP包通信</p>
-<a id="more"></a>
 </li>
+</ul>
+<ul>
 <li><p>套接字相关的系统调用<br>&diams; socket(): 创建一个套接字<br>&diams; bind()： 绑定IP和端口<br>&diams; listen()： 监听<br>&diams; accept()： 接收请求<br>&diams; connect()： 请求连接建立<br>&diams; write()： 发送<br>&diams; read()： 接收<br>&diams; close(): 关闭连接</p>
 </li>
 <li><p>基于TCP客户/服务器程序的套接字函数<br>&diams; 示图1<br><img src="/2018/10/17/http协议与httpd/2.png" alt="jpeg"><br>&diams; 示图2<br><img src="/2018/10/17/http协议与httpd/4.png" alt="jpeg"></p>
@@ -1338,8 +1340,8 @@ window.onmouseout = function () {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/25/DNS服务/" rel="next" title="DNS服务">
-                <i class="fa fa-chevron-left"></i> DNS服务
+              <a href="/2018/10/01/习题整理/" rel="next" title="习题整理">
+                <i class="fa fa-chevron-left"></i> 习题整理
               </a>
             
           </div>
@@ -1436,7 +1438,7 @@ window.onmouseout = function () {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1564,7 +1566,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共107.8k字</span>
+  <span class="post-count">博客全站共114.9k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         

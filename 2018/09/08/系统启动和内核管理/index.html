@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件  &amp;hea">
+<meta name="description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="系统启动和内核管理">
 <meta property="og:url" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
-<meta property="og:description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件  &amp;hea">
+<meta property="og:description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/23.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/1.png">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/8.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/9.png">
 <meta property="og:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/22.png">
-<meta property="og:updated_time" content="2018-10-07T14:12:04.544Z">
+<meta property="og:updated_time" content="2018-10-22T00:17:08.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统启动和内核管理">
-<meta name="twitter:description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件  &amp;hea">
+<meta name="twitter:description" content="系统启动和内核管理Linux组成&amp;hearts;  Linux: kernel+rootfs  kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能 rootfs:程序和glibc 库：函数集合, function, 调用接口（头文件负责描述）&amp;diams;  过程调用：procedure，无返回值&amp;diams;  函数调用：function 程序：二进制执行文件">
 <meta name="twitter:image" content="https://www.xfanyi.top/2018/09/08/系统启动和内核管理/23.png">
 
 
@@ -633,7 +633,8 @@ window.onmouseout = function () {
 <li>kernel: 进程管理、内存管理、网络管理、驱动程序、文件系统、安全功能</li>
 <li>rootfs:程序和glibc</li>
 <li>库：函数集合, function, 调用接口（头文件负责描述）<br>&diams;  过程调用：procedure，无返回值<br>&diams;  函数调用：function</li>
-<li>程序：二进制执行文件</li>
+<li>程序：二进制执行文件<a id="more"></a>
+</li>
 </ul>
 <p>&hearts;  内核设计流派：</p>
 <ul>
@@ -647,10 +648,9 @@ window.onmouseout = function () {
 <p>&hearts;  组成部分：</p>
 <ul>
 <li>核心文件：/boot/vmlinuz-VERSION-release<br>&diams;  ramdisk：辅助的伪根系统<br>&diams;  CentOS 5: /boot/initrd-VERSION-release.img<br>&diams;  CentOS 6,7: /boot/initramfs-VERSION-release.img</li>
-<li>模块文件：/lib/modules/VERSION-release<a id="more"></a>
-<h3 id="CentOS6启动流程"><a href="#CentOS6启动流程" class="headerlink" title="CentOS6启动流程"></a>CentOS6启动流程</h3></li>
+<li>模块文件：/lib/modules/VERSION-release</li>
 </ul>
-<h4 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h4><ol>
+<h3 id="CentOS6启动流程"><a href="#CentOS6启动流程" class="headerlink" title="CentOS6启动流程"></a>CentOS6启动流程</h3><h4 id="总体流程"><a href="#总体流程" class="headerlink" title="总体流程"></a>总体流程</h4><ol>
 <li>Power On 加载BIOS的硬件信息，获取第一个启动设备</li>
 <li>读取第一个启动设备MBR的引导加载程序(grub)的启动信息</li>
 <li>加载核心操作系统的核心信息，核心开始解压缩，并尝试驱动所有的硬件设备</li>
@@ -1049,7 +1049,7 @@ window.onmouseout = function () {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1177,7 +1177,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共107.8k字</span>
+  <span class="post-count">博客全站共114.9k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         
