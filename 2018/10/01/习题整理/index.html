@@ -83,14 +83,14 @@
 <meta name="description" content="综合练习 请简单叙述linux中双引号（“”）、单引号（‘’）、（``）的区别答： `` 用来引用命令,单引号(‘’)防止所有扩展、引号中的内容为原始字符串，双引号的作用也是用来防止扩展、但除了$、反引号（`）、\、!答：&amp;diams; echo ‘date’ 输出为 date字串&amp;diams; echo “‘date’” 输出为当前时间&amp;diams; echo “`“ 输出为单引号 请分别使用命">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="习题整理">
+<meta property="og:title" content="综合练习">
 <meta property="og:url" content="https://www.xfanyi.top/2018/10/01/习题整理/index.html">
 <meta property="og:site_name" content="熊凡懿的博客">
 <meta property="og:description" content="综合练习 请简单叙述linux中双引号（“”）、单引号（‘’）、（``）的区别答： `` 用来引用命令,单引号(‘’)防止所有扩展、引号中的内容为原始字符串，双引号的作用也是用来防止扩展、但除了$、反引号（`）、\、!答：&amp;diams; echo ‘date’ 输出为 date字串&amp;diams; echo “‘date’” 输出为当前时间&amp;diams; echo “`“ 输出为单引号 请分别使用命">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-23T13:37:42.913Z">
+<meta property="og:updated_time" content="2018-10-25T12:35:25.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="习题整理">
+<meta name="twitter:title" content="综合练习">
 <meta name="twitter:description" content="综合练习 请简单叙述linux中双引号（“”）、单引号（‘’）、（``）的区别答： `` 用来引用命令,单引号(‘’)防止所有扩展、引号中的内容为原始字符串，双引号的作用也是用来防止扩展、但除了$、反引号（`）、\、!答：&amp;diams; echo ‘date’ 输出为 date字串&amp;diams; echo “‘date’” 输出为当前时间&amp;diams; echo “`“ 输出为单引号 请分别使用命">
 
 
@@ -127,7 +127,7 @@
 
 
 
-  <title>习题整理 | 熊凡懿的博客</title>
+  <title>综合练习 | 熊凡懿的博客</title>
   
 
 
@@ -513,7 +513,7 @@ window.onmouseout = function () {
 
         
         
-          <h1 class="post-title" itemprop="name headline">习题整理</h1>
+          <h1 class="post-title" itemprop="name headline">综合练习</h1>
         
 
         <div class="post-meta">
@@ -579,7 +579,7 @@ window.onmouseout = function () {
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  194
+                  413
                 </span>
               
 
@@ -619,10 +619,33 @@ window.onmouseout = function () {
       
         <h3 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h3><ol>
 <li>请简单叙述linux中双引号（“”）、单引号（‘’）、（``）的区别<br>答： `` 用来引用命令,单引号(‘’)防止所有扩展、引号中的内容为原始字符串，双引号的作用也是用来防止扩展、但除了<br>$、反引号（`）、\、!<br>答：<br>&diams; echo ‘date’ 输出为 date字串<br>&diams; echo “‘date’” 输出为当前时间<br>&diams; echo “`“ 输出为单引号</li>
-<li><p>请分别使用命令取出系统中网卡的mtu值与网卡的速率<br>答: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mtu = ifconfig | egrep -o <span class="string">'MTU:[^[:space:]]+'</span> | cut -d <span class="string">":"</span> -f2</span><br><span class="line">速率 = ethtool eth0 | grep -i speed | egrep -o <span class="string">"[0-9]+"</span></span><br></pre></td></tr></table></figure>
+<li>请分别使用命令取出系统中网卡的mtu值与网卡的速率<br>答: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mtu = ifconfig | egrep -o <span class="string">'MTU:[^[:space:]]+'</span> | cut -d <span class="string">":"</span> -f2</span><br><span class="line">速率 = ethtool eth0 | grep -i speed | egrep -o <span class="string">"[0-9]+"</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>找出仅/data目录下大小50k小于100k的文件，放到/opt/tmp/tmp/目录下<br>注：/opt/tmp/tmp目录原本不存在，/data目录下存在多个目录及文件，要求一条命令解决</p>
+</ol>
+<a id="more"></a>
+<ol start="3">
+<li><p>写一个脚本查找最后创建时间是3天前，后缀是*.log的文件并删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">find / -<span class="built_in">type</span> f -name <span class="string">"*.log"</span> -mtime +3 -<span class="built_in">exec</span> rm &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个脚本将某目录下大于100K的文件移动到/tmp下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">find /dir -<span class="built_in">type</span> f -size +100k -<span class="built_in">exec</span> mv &#123;&#125; /tmp \;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个防火墙配置脚本，只允许远程主机访问本机的80端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">iptables -A INPUT -j DROP</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写一个脚本进行nginx日志统计，得到访问IP最多的前10个（日志路径/data/logs/nginx/default/access.log)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">cat /data/logs/nginx/default/access.log | awk <span class="string">'&#123;print $1&#125;'</span> | sort | uniq -c |sort -nr | head &gt; /opt/nginx.log </span><br><span class="line">cat /opt/nginx.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写出下列命令的含义</p>
+<ul>
+<li><p>MaxKeepAliveRequests<br>&diams; httpd持久连接、请求数量限制</p>
+</li>
+<li><p>KeepAliveTimeout<br>&diams; httpd持久连接、超时时长限制</p>
+</li>
+<li><p>Options FollowSymLinks<br>&diams; 允许访问符号链接文件所指向的源文件</p>
+<p>&diams; Order Deny Allow<br>&diams; Deny from all<br>&diams; Allow from 192.168.1.1<br>&diams; 默认访问控制黑名单，拒绝除了192.168.1.1的IP访问        </p>
+</li>
+</ul>
 </li>
 </ol>
 
@@ -922,7 +945,7 @@ window.onmouseout = function () {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共114.9k字</span>
+  <span class="post-count">博客全站共118.1k字</span>
 </div>
 <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
         
